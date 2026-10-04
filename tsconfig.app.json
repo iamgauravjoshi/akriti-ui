@@ -23,5 +23,16 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    // Legacy, unexported code: not imported by the app or the library entry.
+    // Pending deletion; excluded so `tsc -b` covers the real graph.
+    "src/components/common",
+    "src/components/ButtonsDemo.tsx",
+    "src/components/ModalDemo.tsx",
+    "src/components/TableDemo.tsx",
+    "src/components/FormDemo01.tsx",
+    "src/components/FormDemo02.tsx",
+    "src/components/static"
+  ]
 }

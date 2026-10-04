@@ -1,4 +1,4 @@
-import type { SemanticIntent } from "../../types/common";
+import type { SemanticIntent } from "../types/common";
 
 export function resolveIntent(intent: SemanticIntent = "default"): Exclude<
   SemanticIntent,

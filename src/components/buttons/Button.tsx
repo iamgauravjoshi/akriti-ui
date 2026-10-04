@@ -12,7 +12,7 @@ export type ButtonVariant =
   | "text"
   | "link";
 
-export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"> & {
   variant?: ButtonVariant;
   intent?: SemanticIntent;
   color?: SemanticIntent;
@@ -141,7 +141,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading ? (
           <>
-            <Spinner size={size === "xs" ? "xs" : "sm"} />
+            <Spinner size={size === "xs" ? "xs" : "sm"} label="" />
             {loadingText ?? children}
           </>
         ) : (
