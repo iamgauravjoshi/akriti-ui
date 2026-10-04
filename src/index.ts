@@ -1,3 +1,5 @@
+import "./akriti.css";
+
 export { Button, type ButtonProps, type ButtonVariant } from "./components/buttons/Button";
 export {
   IconButton,
