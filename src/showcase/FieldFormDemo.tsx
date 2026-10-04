@@ -29,6 +29,12 @@ const fields: FieldFormField[] = [
     placeholder: "+15551234567",
   },
   {
+    name: "teamSize",
+    label: "Team Size",
+    type: "number",
+    placeholder: "How many people are on your team?",
+  },
+  {
     name: "company",
     label: "Company",
     type: "text",

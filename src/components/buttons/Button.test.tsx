@@ -26,4 +26,11 @@ describe("Button", () => {
     await user.click(button);
     expect(onClick).not.toHaveBeenCalled();
   });
+
+  it("keeps the deprecated color prop working as intent", () => {
+    render(<Button color="danger">Delete</Button>);
+    expect(screen.getByRole("button", { name: "Delete" })).toHaveClass(
+      "bg-danger",
+    );
+  });
 });

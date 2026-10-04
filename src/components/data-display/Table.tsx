@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import {
   ArrowDownAZ,
   ArrowDownZA,
@@ -33,6 +33,7 @@ export type TableProps<T extends object> = {
   columns: TableColumn<T>[];
   data: T[];
   className?: string;
+  style?: CSSProperties;
   selectable?: boolean;
   onSelectionChange?: (selectedRows: T[], selectedIds: (string | number)[]) => void;
   onRowClick?: (record: T, index: number) => void;
@@ -54,6 +55,7 @@ export function Table<T extends object>({
   columns,
   data,
   className,
+  style,
   selectable = false,
   onSelectionChange,
   onRowClick,
@@ -91,7 +93,13 @@ export function Table<T extends object>({
   }
 
   return (
-    <div className={cn("overflow-hidden rounded-xl border border-border bg-surface shadow-sm", className)}>
+    <div
+      className={cn(
+        "overflow-hidden rounded-xl border border-border bg-surface shadow-sm",
+        className,
+      )}
+      style={style}
+    >
       {(showSearch || showFilter) && (
         <div className="border-b border-border p-4">
           <div className="flex flex-col gap-4 sm:flex-row">
