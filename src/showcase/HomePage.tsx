@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Bell,
@@ -80,6 +81,16 @@ const stats = [
   { value: "3", label: "Theme modes" },
 ];
 
+const rise = {
+  hidden: { opacity: 0, y: 16 },
+  show: { opacity: 1, y: 0 },
+};
+
+const staggerParent = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
 export default function HomePage() {
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
@@ -96,7 +107,12 @@ export default function HomePage() {
 
   return (
     <Stack gap={12}>
-      <section className="relative overflow-hidden rounded-2xl border border-border">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="relative overflow-hidden rounded-2xl border border-border"
+      >
         <div
           aria-hidden
           className="absolute inset-0 bg-gradient-to-br from-primary/15 via-info/10 to-success/15 dark:from-primary/25 dark:via-info/15 dark:to-success/20"
@@ -162,12 +178,21 @@ export default function HomePage() {
             </div>
           </Stack>
         </div>
-      </section>
+      </motion.section>
 
-      <section>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <motion.section
+        variants={staggerParent}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-40px" }}
+      >
+        <motion.div
+          variants={rise}
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {features.map((feature) => (
-            <Card key={feature.title} className="group transition-shadow hover:shadow-md">
+            <motion.div key={feature.title} variants={rise}>
+            <Card className="group h-full transition-shadow hover:shadow-md">
               <CardHeader>
                 <span className="mb-1 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <feature.icon size={18} aria-hidden />
@@ -180,22 +205,32 @@ export default function HomePage() {
                 </Text>
               </CardContent>
             </Card>
+            </motion.div>
           ))}
-        </div>
-      </section>
+        </motion.div>
+      </motion.section>
 
-      <section>
+      <motion.section
+        variants={staggerParent}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-40px" }}
+      >
         <Stack gap={4}>
-          <div>
+          <motion.div variants={rise}>
             <Heading level={2}>Component catalog</Heading>
             <Text tone="muted">
               Every component below is live — open a page to interact with it
               in both themes.
             </Text>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          </motion.div>
+          <motion.div
+            variants={rise}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {catalog.map((entry) => (
-              <Link key={entry.to} to={entry.to} className="group block">
+              <motion.div key={entry.to} variants={rise}>
+              <Link to={entry.to} className="group block h-full">
                 <Card className="h-full transition-all group-hover:-translate-y-0.5 group-hover:border-primary/40 group-hover:shadow-md">
                   <CardHeader>
                     <span className="mb-1 flex h-9 w-9 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
@@ -215,12 +250,19 @@ export default function HomePage() {
                   </CardHeader>
                 </Card>
               </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </Stack>
-      </section>
+      </motion.section>
 
-      <section className="overflow-hidden rounded-2xl border border-border bg-surface">
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.35 }}
+        className="overflow-hidden rounded-2xl border border-border bg-surface"
+      >
         <div className="grid gap-0 lg:grid-cols-2">
           <div className="flex flex-col justify-center gap-4 p-8 sm:p-10">
             <Badge tone="success" className="self-start">
@@ -266,7 +308,7 @@ export default function HomePage() {
             </pre>
           </div>
         </div>
-      </section>
+      </motion.section>
     </Stack>
   );
 }
