@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { animate, motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   Bell,
@@ -88,31 +88,10 @@ const catalog = [
 ];
 
 const stats = [
-  { value: 60, suffix: "+", label: "Components" },
-  { value: 27, suffix: "", label: "Semantic tokens" },
-  { value: 3, suffix: "", label: "Theme modes" },
+  { value: "60", suffix: "+", label: "Components" },
+  { value: "27", suffix: "", label: "Semantic tokens" },
+  { value: "3", suffix: "", label: "Theme modes" },
 ];
-
-function CountUp({ value, suffix }: { value: number; suffix: string }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const inView = useInView(ref, { once: true });
-  const [display, setDisplay] = useState(0);
-  useEffect(() => {
-    if (!inView) return;
-    const controls = animate(0, value, {
-      duration: 1.2,
-      ease: "easeOut",
-      onUpdate: (latest) => setDisplay(Math.round(latest)),
-    });
-    return () => controls.stop();
-  }, [inView, value]);
-  return (
-    <p ref={ref} className="font-display text-2xl font-bold sm:text-3xl">
-      {display}
-      {suffix}
-    </p>
-  );
-}
 
 const rise = {
   hidden: { opacity: 0, y: 16 },
@@ -149,15 +128,17 @@ function Playground() {
   const [alertsOn, setAlertsOn] = useState(true);
   return (
     <div className="grid gap-0 lg:grid-cols-2">
-      <div className="flex flex-col justify-center gap-4 p-8 sm:p-10">
+      <div className="flex flex-col justify-center gap-5 p-8 sm:p-10">
         <Badge tone="info" className="self-start">
           Live demo
         </Badge>
-        <Heading level={2}>Real components, right here</Heading>
-        <Text tone="muted">
-          Everything on this page is an Akriti component. Flip the switch,
-          change tabs, send yourself a toast.
-        </Text>
+        <div>
+          <Heading level={2}>Real components, right here</Heading>
+          <Text tone="muted" className="mt-1">
+            Everything on this page is an Akriti component. Flip the switch,
+            change tabs, send yourself a toast.
+          </Text>
+        </div>
         <div className="flex flex-wrap items-center gap-3">
           <Switch
             label="Product updates"
@@ -168,21 +149,23 @@ function Playground() {
             {alertsOn ? "Subscribed" : "Muted"}
           </Tag>
         </div>
-        <Tabs defaultValue="message" className="w-full max-w-sm">
+        <Tabs defaultValue="message" className="w-full">
           <TabsList>
             <TabsTrigger value="message">Message</TabsTrigger>
             <TabsTrigger value="preview">Preview</TabsTrigger>
           </TabsList>
           <TabsContent value="message">
-            <div className="flex flex-col gap-3 pt-1 sm:flex-row">
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row">
               <Input
                 value={message}
                 onChange={(event) => setMessage(event.target.value)}
                 placeholder="Toast message"
                 aria-label="Toast message"
+                className="min-w-0 flex-1"
               />
               <Button
                 intent="success"
+                className="shrink-0"
                 onClick={() =>
                   success(message.trim() === "" ? "Hello!" : message, {
                     description: "Sent from the homepage playground.",
@@ -194,7 +177,7 @@ function Playground() {
             </div>
           </TabsContent>
           <TabsContent value="preview">
-            <div className="pt-1">
+            <div className="max-w-sm pt-2">
               <Progress percent={72} intent="info" />
             </div>
           </TabsContent>
@@ -252,11 +235,13 @@ function ThemeLab() {
         <Badge tone="success" className="self-start">
           Theming
         </Badge>
-        <Heading level={2}>Recolor this panel live</Heading>
-        <Text tone="muted">
-          Pick a brand color. Tokens re-apply at runtime inside this panel
-          only — the rest of the page is untouched.
-        </Text>
+        <div>
+          <Heading level={2}>Recolor this panel live</Heading>
+          <Text tone="muted" className="mt-1">
+            Pick a brand color. Tokens re-apply at runtime inside this panel
+            only — the rest of the page is untouched.
+          </Text>
+        </div>
         <div className="flex flex-wrap items-center gap-2">
           {themePresets.map((color) => (
             <button
@@ -372,16 +357,24 @@ export default function HomePage() {
                 Live demos
               </Button>
             </Stack>
-            <div className="flex flex-wrap items-center justify-center gap-8 pt-2">
+            <motion.dl
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="flex flex-wrap items-start justify-center gap-8 pt-2"
+            >
               {stats.map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <CountUp value={stat.value} suffix={stat.suffix} />
-                  <p className="text-xs tracking-wider text-muted-foreground uppercase">
+                  <dd className="font-display text-2xl font-bold sm:text-3xl">
+                    {stat.value}
+                    {stat.suffix}
+                  </dd>
+                  <dt className="text-xs tracking-wider text-muted-foreground uppercase">
                     {stat.label}
-                  </p>
+                  </dt>
                 </div>
               ))}
-            </div>
+            </motion.dl>
           </Stack>
         </div>
       </motion.section>
