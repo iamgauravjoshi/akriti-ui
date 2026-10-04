@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Bell,
+  Blocks,
   Braces,
-  Calendar,
   Check,
   ClipboardList,
   Copy,
@@ -14,6 +14,7 @@ import {
   Keyboard,
   Layers,
   LayoutGrid,
+  Moon,
   MousePointerClick,
   Navigation,
   Package,
@@ -25,6 +26,7 @@ import {
   Type,
 } from "lucide-react";
 import {
+  Avatar,
   Badge,
   Button,
   Card,
@@ -34,9 +36,12 @@ import {
   Code,
   Heading,
   Input,
+  Modal,
   Progress,
+  Select,
   Stack,
   Switch,
+  Table,
   Tabs,
   TabsContent,
   TabsList,
@@ -46,30 +51,46 @@ import {
   useToast,
 } from "..";
 import { applyThemeVars, clearThemeVars } from "../themes/createTheme";
+import { GITHUB_URL } from "./site";
 import { SiteHeader } from "./SiteHeader";
-import { CodeBlock } from "./CodeBlock";
 
-const features = [
-  {
-    icon: Palette,
-    title: "Semantic theming",
-    body: "Token-driven light, dark, and system modes with runtime overrides through CSS variables.",
-  },
+const whyItems = [
   {
     icon: Keyboard,
     title: "Accessible by default",
-    body: "Radix primitives, keyboard support, focus management, and ARIA semantics built in.",
+    body: "Radix primitives, full keyboard support, focus management, and ARIA semantics in every interactive component.",
   },
   {
     icon: Braces,
-    title: "Strict TypeScript",
-    body: "Typed props, generics for tables and forms, and shipped declaration files.",
+    title: "Strict TypeScript APIs",
+    body: "Typed props, generic tables and forms, and shipped declaration files — autocomplete you can trust.",
+  },
+  {
+    icon: Palette,
+    title: "Semantic design tokens",
+    body: "Colors, radii, shadows, and spacing flow through --ak-* variables. Theme once, apply everywhere.",
+  },
+  {
+    icon: Moon,
+    title: "First-class dark mode",
+    body: "Light, dark, and system modes with runtime switching and per-theme token values out of the box.",
+  },
+  {
+    icon: Blocks,
+    title: "Reusable primitives",
+    body: "Compound components like Tabs, Card, and Accordion compose cleanly instead of locking you into layouts.",
   },
   {
     icon: Package,
-    title: "Tree-shakable",
-    body: "One barrel entry, side-effect-free modules, and a single scoped stylesheet.",
+    title: "Tree-shakable package",
+    body: "One barrel entry, side-effect-free modules, and a single scoped stylesheet. Import only what you render.",
   },
+];
+
+const stats = [
+  { value: "60", suffix: "+", label: "Components" },
+  { value: "27", suffix: "", label: "Semantic tokens" },
+  { value: "3", suffix: "", label: "Theme modes" },
 ];
 
 const catalog = [
@@ -87,12 +108,6 @@ const catalog = [
   { to: "/components/toast", title: "Toast", body: "Notifications with progress and pause.", icon: Bell },
 ];
 
-const stats = [
-  { value: "60", suffix: "+", label: "Components" },
-  { value: "27", suffix: "", label: "Semantic tokens" },
-  { value: "3", suffix: "", label: "Theme modes" },
-];
-
 const rise = {
   hidden: { opacity: 0, y: 16 },
   show: { opacity: 1, y: 0 },
@@ -102,6 +117,226 @@ const staggerParent = {
   hidden: {},
   show: { transition: { staggerChildren: 0.06 } },
 };
+
+function HeroPreview() {
+  const [alertsOn, setAlertsOn] = useState(true);
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.15 }}
+      className="relative mx-auto w-full max-w-md"
+    >
+      <motion.div
+        aria-hidden
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="overflow-hidden rounded-2xl border border-border bg-surface shadow-lg"
+      >
+        <div className="flex items-center gap-1.5 border-b border-border px-4 py-2.5">
+          <span className="h-2.5 w-2.5 rounded-full bg-muted" aria-hidden />
+          <span className="h-2.5 w-2.5 rounded-full bg-muted" aria-hidden />
+          <span className="h-2.5 w-2.5 rounded-full bg-muted" aria-hidden />
+          <span className="ml-2 rounded-md bg-muted px-2 py-0.5 font-mono text-xs text-muted-foreground">
+            akriti-ui — preview
+          </span>
+          <span className="ml-auto">
+            <Badge tone="success">Live</Badge>
+          </span>
+        </div>
+        <div className="flex flex-col gap-4 p-5">
+          <div className="flex items-center gap-3">
+            <Avatar name="Ada Lovelace" />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-medium">Ada Lovelace</p>
+              <p className="truncate text-xs text-muted-foreground">Administrator</p>
+            </div>
+            <Tag tone="info">Beta</Tag>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <Button size="sm">Save changes</Button>
+            <Button size="sm" variant="outline">
+              Preview
+            </Button>
+            <Button size="sm" variant="ghost" intent="danger">
+              Delete
+            </Button>
+          </div>
+          <Tabs defaultValue="overview">
+            <TabsList>
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="activity">Activity</TabsTrigger>
+            </TabsList>
+            <TabsContent value="overview">
+              <Progress percent={72} intent="success" />
+            </TabsContent>
+            <TabsContent value="activity">
+              <Text size="sm" tone="muted">
+                12 deployments this week.
+              </Text>
+            </TabsContent>
+          </Tabs>
+          <div className="flex items-center justify-between gap-3 border-t border-border pt-3">
+            <Text size="sm">Email notifications</Text>
+            <Switch
+              aria-label="Email notifications"
+              checked={alertsOn}
+              onCheckedChange={setAlertsOn}
+            />
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function DemoButtons() {
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button size="sm">Primary</Button>
+      <Button size="sm" variant="secondary">
+        Secondary
+      </Button>
+      <Button size="sm" variant="outline">
+        Outline
+      </Button>
+      <Button size="sm" intent="success">
+        Success
+      </Button>
+      <Button size="sm" intent="danger">
+        Danger
+      </Button>
+    </div>
+  );
+}
+
+function DemoInputs() {
+  return (
+    <div className="flex max-w-sm flex-col gap-3">
+      <Input placeholder="Search components..." aria-label="Search components" />
+      <Select
+        options={[
+          { label: "React", value: "react" },
+          { label: "Vue", value: "vue" },
+        ]}
+        value="react"
+        onChange={() => undefined}
+        aria-label="Framework"
+      />
+      <Switch label="Enable notifications" defaultChecked />
+    </div>
+  );
+}
+
+function DemoDisplay() {
+  return (
+    <div className="flex flex-col gap-3">
+      <Card>
+        <CardHeader>
+          <CardTitle>Quarterly review</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Progress percent={80} intent="success" />
+        </CardContent>
+      </Card>
+      <div className="flex flex-wrap items-center gap-2">
+        <Badge count={5}>
+          <Avatar name="Grace Hopper" size="sm" />
+        </Badge>
+        <Tag tone="success">On track</Tag>
+        <Tag tone="warning">Pending</Tag>
+      </div>
+    </div>
+  );
+}
+
+function DemoNavigation() {
+  return (
+    <Tabs defaultValue="account" className="w-full max-w-sm">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="billing">Billing</TabsTrigger>
+        <TabsTrigger value="security">Security</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <Text size="sm" tone="muted">
+          Profile, preferences, and linked accounts live here.
+        </Text>
+      </TabsContent>
+      <TabsContent value="billing">
+        <Text size="sm" tone="muted">
+          Invoices, plan, and payment methods live here.
+        </Text>
+      </TabsContent>
+      <TabsContent value="security">
+        <Text size="sm" tone="muted">
+          Sessions and two-factor settings live here.
+        </Text>
+      </TabsContent>
+    </Tabs>
+  );
+}
+
+const miniRows = [
+  { id: 1, name: "Ada Lovelace", role: "Admin" },
+  { id: 2, name: "Alan Turing", role: "Editor" },
+  { id: 3, name: "Grace Hopper", role: "Viewer" },
+];
+
+function DemoTable() {
+  return (
+    <Table
+      showSearch={false}
+      pageSize={5}
+      data={miniRows}
+      columns={[
+        { key: "name", title: "Name", sortable: true },
+        { key: "role", title: "Role", sortable: true },
+      ]}
+    />
+  );
+}
+
+function DemoFeedback() {
+  const { success } = useToast();
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  return (
+    <div className="flex flex-wrap gap-2">
+      <Button
+        size="sm"
+        intent="success"
+        onClick={() => success("Deployed", { description: "Build #482 is live." })}
+      >
+        Send toast
+      </Button>
+      <Button size="sm" variant="outline" onClick={() => setConfirmOpen(true)}>
+        Open dialog
+      </Button>
+      <Modal
+        isOpen={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        title="Publish changes?"
+        size="sm"
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={() => setConfirmOpen(false)}
+        confirmText="Publish"
+      >
+        <Text size="sm" tone="muted">
+          This will deploy the current build to production.
+        </Text>
+      </Modal>
+    </div>
+  );
+}
+
+const liveDemos: { title: string; body: string; demo: () => React.JSX.Element }[] = [
+  { title: "Buttons", body: "Variants, intents, and sizes.", demo: DemoButtons },
+  { title: "Inputs", body: "Fields, selects, and toggles.", demo: DemoInputs },
+  { title: "Display", body: "Cards, badges, tags, avatars.", demo: DemoDisplay },
+  { title: "Navigation", body: "Tabs with keyboard support.", demo: DemoNavigation },
+  { title: "Data", body: "Sortable tables out of the box.", demo: DemoTable },
+  { title: "Feedback", body: "Toasts and dialogs that work.", demo: DemoFeedback },
+];
 
 function shade(hex: string, amount: number): string {
   const flat = hex.replace("#", "");
@@ -121,89 +356,6 @@ function shade(hex: string, amount: number): string {
 }
 
 const themePresets = ["#2563eb", "#635bff", "#9333ea", "#0891b2", "#16a34a", "#dc2626"];
-
-function Playground() {
-  const { success } = useToast();
-  const [message, setMessage] = useState("Profile saved");
-  const [alertsOn, setAlertsOn] = useState(true);
-  return (
-    <div className="grid gap-0 lg:grid-cols-2">
-      <div className="flex flex-col justify-center gap-5 p-8 sm:p-10">
-        <Badge tone="info" className="self-start">
-          Live demo
-        </Badge>
-        <div>
-          <Heading level={2}>Real components, right here</Heading>
-          <Text tone="muted" className="mt-1">
-            Everything on this page is an Akriti component. Flip the switch,
-            change tabs, send yourself a toast.
-          </Text>
-        </div>
-        <div className="flex flex-wrap items-center gap-3">
-          <Switch
-            label="Product updates"
-            checked={alertsOn}
-            onCheckedChange={setAlertsOn}
-          />
-          <Tag tone={alertsOn ? "success" : "default"}>
-            {alertsOn ? "Subscribed" : "Muted"}
-          </Tag>
-        </div>
-        <Tabs defaultValue="message" className="w-full">
-          <TabsList>
-            <TabsTrigger value="message">Message</TabsTrigger>
-            <TabsTrigger value="preview">Preview</TabsTrigger>
-          </TabsList>
-          <TabsContent value="message">
-            <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-              <Input
-                value={message}
-                onChange={(event) => setMessage(event.target.value)}
-                placeholder="Toast message"
-                aria-label="Toast message"
-                className="min-w-0 flex-1"
-              />
-              <Button
-                intent="success"
-                className="shrink-0"
-                onClick={() =>
-                  success(message.trim() === "" ? "Hello!" : message, {
-                    description: "Sent from the homepage playground.",
-                  })
-                }
-              >
-                Send toast
-              </Button>
-            </div>
-          </TabsContent>
-          <TabsContent value="preview">
-            <div className="max-w-sm pt-2">
-              <Progress percent={72} intent="info" />
-            </div>
-          </TabsContent>
-        </Tabs>
-      </div>
-      <div className="border-t border-border bg-[#0f172a] p-8 sm:p-10 lg:border-t-0 lg:border-l dark:bg-black/40">
-        <CodeBlock title="playground.tsx">
-{`const { success } = useToast();
-
-const [alerts, setAlerts] = useState(true);
-
-<Switch
-  label="Product updates"
-  checked={alerts}
-  onCheckedChange={setAlerts}
-/>
-
-<Button
-  intent="success"
-  onClick={() => success("Profile saved")}
-/>`}
-        </CodeBlock>
-      </div>
-    </div>
-  );
-}
 
 function ThemeLab() {
   const labRef = useRef<HTMLDivElement>(null);
@@ -296,45 +448,45 @@ export default function HomePage() {
       <SiteHeader onMenu={() => undefined} />
       <main className="mx-auto max-w-6xl px-4">
       <Stack gap={12}>
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="relative overflow-hidden rounded-2xl border border-border"
-      >
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-br from-primary/15 via-info/10 to-success/15 dark:from-primary/25 dark:via-info/15 dark:to-success/20"
-        />
-        <motion.div
-          aria-hidden
-          animate={{ x: [0, 24, -12, 0], y: [0, -18, 10, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl dark:bg-primary/30"
-        />
-        <motion.div
-          aria-hidden
-          animate={{ x: [0, -20, 14, 0], y: [0, 14, -12, 0] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-info/20 blur-3xl dark:bg-info/25"
-        />
-        <div className="relative px-6 py-14 text-center sm:px-12 sm:py-20">
-          <Stack gap={5} align="center">
-            <Badge tone="info">
-              <Sparkles size={12} aria-hidden />
-              <span className="ml-1">React · TypeScript · Tokens</span>
-            </Badge>
-            <h1 className="max-w-3xl font-display text-4xl font-bold leading-tight sm:text-6xl">
-              Interfaces that feel{" "}
-              <span className="bg-gradient-to-r from-primary via-info to-success bg-clip-text text-transparent">
-                inevitable
-              </span>
-            </h1>
-            <Text tone="muted" size="lg" className="max-w-xl">
-              Akriti UI is a themed, accessible React component system with
-              semantic design tokens and strict TypeScript APIs.
-            </Text>
-            <div className="flex flex-wrap items-center justify-center gap-3">
+      <section className="relative overflow-hidden">
+        <div className="grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr]">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45 }}
+          >
+            <Stack gap={5}>
+              <Badge tone="info">
+                <Sparkles size={12} aria-hidden />
+                <span className="ml-1">React · TypeScript · Tokens</span>
+              </Badge>
+              <h1 className="max-w-xl font-display text-4xl font-bold leading-tight sm:text-5xl">
+                Accessible React components,{" "}
+                <span className="text-primary">themed in minutes</span>
+              </h1>
+              <Text tone="muted" size="lg" className="max-w-lg">
+                Akriti UI is an open-source component library with semantic
+                design tokens, dark mode, and strict TypeScript APIs — install
+                it and ship production interfaces today.
+              </Text>
+              <div className="flex flex-wrap items-center gap-3">
+                <Button variant="primary" onClick={() => navigate("/docs/getting-started")}>
+                  Get Started
+                  <ArrowRight size={16} aria-hidden />
+                </Button>
+                <Button variant="outline" onClick={() => navigate("/components")}>
+                  View Components
+                </Button>
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Akriti UI on GitHub"
+                  className="inline-flex h-10 items-center rounded-md border border-border px-3 text-sm font-medium text-foreground transition-colors hover:bg-muted"
+                >
+                  GitHub
+                </a>
+              </div>
               <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5 shadow-sm">
                 <Code>npm install akriti-ui</Code>
                 <button
@@ -346,37 +498,59 @@ export default function HomePage() {
                   {copied ? <Check size={14} /> : <Copy size={14} />}
                 </button>
               </div>
-            </div>
-            <Stack direction="row" gap={3} justify="center">
-              <Button variant="primary" onClick={() => navigate("/components/primitives")}>
-                Explore components
-                <ArrowRight size={16} aria-hidden />
-              </Button>
-              <Button variant="outline" onClick={() => navigate("/components/field-form")}>
-                <Calendar size={16} aria-hidden />
-                Live demos
-              </Button>
+              <dl className="flex flex-wrap items-start gap-8 pt-2">
+                {stats.map((stat) => (
+                  <div key={stat.label} className="text-center">
+                    <dd className="font-display text-2xl font-bold">
+                      {stat.value}
+                      {stat.suffix}
+                    </dd>
+                    <dt className="text-xs tracking-wider text-muted-foreground uppercase">
+                      {stat.label}
+                    </dt>
+                  </div>
+                ))}
+              </dl>
             </Stack>
-            <motion.dl
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="flex flex-wrap items-start justify-center gap-8 pt-2"
-            >
-              {stats.map((stat) => (
-                <div key={stat.label} className="text-center">
-                  <dd className="font-display text-2xl font-bold sm:text-3xl">
-                    {stat.value}
-                    {stat.suffix}
-                  </dd>
-                  <dt className="text-xs tracking-wider text-muted-foreground uppercase">
-                    {stat.label}
-                  </dt>
-                </div>
-              ))}
-            </motion.dl>
-          </Stack>
+          </motion.div>
+          <HeroPreview />
         </div>
+      </section>
+
+      <motion.section
+        variants={staggerParent}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-40px" }}
+      >
+        <Stack gap={4}>
+          <motion.div variants={rise}>
+            <Heading level={2}>Why Akriti UI</Heading>
+            <Text tone="muted">
+              Everything a production interface needs — and nothing it doesn&apos;t.
+            </Text>
+          </motion.div>
+          <motion.div
+            variants={rise}
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
+            {whyItems.map((item) => (
+              <motion.div key={item.title} variants={rise}>
+                <Card className="h-full">
+                  <CardHeader>
+                    <span className="mb-1 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <item.icon size={18} aria-hidden />
+                    </span>
+                    <CardTitle>{item.title}</CardTitle>
+                    <Text size="sm" tone="muted">
+                      {item.body}
+                    </Text>
+                  </CardHeader>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </Stack>
       </motion.section>
 
       <motion.section
@@ -385,12 +559,35 @@ export default function HomePage() {
         whileInView="show"
         viewport={{ once: true, margin: "-40px" }}
       >
-        <motion.div
-          variants={rise}
-          className="overflow-hidden rounded-2xl border border-border bg-surface"
-        >
-          <Playground />
-        </motion.div>
+        <Stack gap={4}>
+          <motion.div variants={rise}>
+            <Heading level={2}>Live component showcase</Heading>
+            <Text tone="muted">
+              Real, working components — not mockups. Interact with them, then
+              open the full guides.
+            </Text>
+          </motion.div>
+          <motion.div
+            variants={rise}
+            className="grid grid-cols-1 gap-4 lg:grid-cols-2"
+          >
+            {liveDemos.map((entry) => (
+              <motion.div key={entry.title} variants={rise}>
+                <Card className="h-full">
+                  <CardHeader>
+                    <CardTitle>{entry.title}</CardTitle>
+                    <Text size="sm" tone="muted">
+                      {entry.body}
+                    </Text>
+                  </CardHeader>
+                  <CardContent>
+                    <entry.demo />
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </Stack>
       </motion.section>
 
       <motion.section
@@ -404,36 +601,6 @@ export default function HomePage() {
           className="overflow-hidden rounded-2xl border border-border bg-surface"
         >
           <ThemeLab />
-        </motion.div>
-      </motion.section>
-
-      <motion.section
-        variants={staggerParent}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-40px" }}
-      >
-        <motion.div
-          variants={rise}
-          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
-        >
-          {features.map((feature) => (
-            <motion.div key={feature.title} variants={rise}>
-            <Card className="group h-full transition-shadow hover:shadow-md">
-              <CardHeader>
-                <span className="mb-1 flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                  <feature.icon size={18} aria-hidden />
-                </span>
-                <CardTitle>{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Text size="sm" tone="muted">
-                  {feature.body}
-                </Text>
-              </CardContent>
-            </Card>
-            </motion.div>
-          ))}
         </motion.div>
       </motion.section>
 
@@ -536,11 +703,78 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
+
+      <motion.section
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-40px" }}
+        transition={{ duration: 0.35 }}
+      >
+        <div className="rounded-2xl border border-primary/25 bg-primary/[0.04] px-6 py-12 text-center sm:px-12 dark:bg-primary/10">
+          <Stack gap={4} align="center">
+            <Heading level={2}>Start building with Akriti UI</Heading>
+            <Text tone="muted" className="max-w-lg">
+              Read the five-minute guide, then theme the system to match
+              your brand.
+            </Text>
+            <Stack direction="row" gap={3} justify="center">
+              <Button variant="primary" onClick={() => navigate("/docs/getting-started")}>
+                Get Started
+                <ArrowRight size={16} aria-hidden />
+              </Button>
+              <Button variant="outline" onClick={() => navigate("/components")}>
+                Browse components
+              </Button>
+            </Stack>
+          </Stack>
+        </div>
+      </motion.section>
       </Stack>
       </main>
-      <footer className="border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
-        Akriti UI component showcase — import from{" "}
-        <code className="rounded bg-muted px-1 py-0.5">akriti-ui</code>.
+      <footer className="border-t border-border">
+        <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p className="font-display text-base font-bold">Akriti UI</p>
+            <p className="mt-2 max-w-xs text-sm text-muted-foreground">
+              An accessible, themeable React component library with strict
+              TypeScript APIs.
+            </p>
+          </div>
+          <nav aria-label="Product">
+            <p className="mb-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+              Product
+            </p>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/components" className="text-muted-foreground hover:text-foreground">Components</Link></li>
+              <li><Link to="/docs" className="text-muted-foreground hover:text-foreground">Documentation</Link></li>
+              <li><Link to="/docs/theming" className="text-muted-foreground hover:text-foreground">Theming</Link></li>
+            </ul>
+          </nav>
+          <nav aria-label="Resources">
+            <p className="mb-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+              Resources
+            </p>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/docs/getting-started" className="text-muted-foreground hover:text-foreground">Getting started</Link></li>
+              <li>
+                <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-foreground">
+                  GitHub repository
+                </a>
+              </li>
+            </ul>
+          </nav>
+          <div>
+            <p className="mb-3 text-xs font-semibold tracking-wider text-muted-foreground uppercase">
+              Install
+            </p>
+            <div className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2">
+              <Code>npm install akriti-ui</Code>
+            </div>
+          </div>
+        </div>
+        <div className="border-t border-border px-4 py-5 text-center text-xs text-muted-foreground">
+          © 2026 Akriti UI · MIT License · Built with React and Tailwind CSS
+        </div>
       </footer>
     </div>
   );
