@@ -36,6 +36,17 @@ export type SiteRoute = {
 
 export const siteRoutes: SiteRoute[] = [
   {
+    to: "/components",
+    label: "Overview",
+    title: "Components",
+    description: "Browse every component with live, interactive demos.",
+    group: "Overview",
+    icon: LayoutGrid,
+    section: "components",
+    end: true,
+    keywords: "components overview catalog all",
+  },
+  {
     to: "/components/buttons",
     label: "Buttons",
     title: "Buttons",

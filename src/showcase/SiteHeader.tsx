@@ -25,9 +25,6 @@ function Brand() {
         <span className="block font-display text-base font-bold leading-none">
           Akriti UI
         </span>
-        <span className="mt-1 block text-xs leading-none text-muted-foreground">
-          v0.1.0 · pre-release
-        </span>
       </span>
     </Link>
   );
@@ -119,28 +116,6 @@ export function SiteHeader({ onMenu }: { onMenu: () => void }) {
             </IconButton>
           </div>
         </div>
-        <nav
-          aria-label="Primary mobile"
-          className="flex items-center gap-1 overflow-x-auto border-t border-border px-4 py-2 md:hidden"
-        >
-          {tabs.map((tab) => (
-            <NavLink
-              key={tab.to}
-              to={tab.to}
-              end={tab.end}
-              className={({ isActive }) =>
-                cn(
-                  "rounded-lg px-3 py-1.5 text-sm font-medium whitespace-nowrap transition-colors",
-                  isActive
-                    ? "bg-muted text-foreground"
-                    : "text-muted-foreground hover:text-foreground",
-                )
-              }
-            >
-              {tab.label}
-            </NavLink>
-          ))}
-        </nav>
       </header>
       <SearchPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>

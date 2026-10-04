@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ShowcaseLayout } from "./showcase/ShowcaseLayout";
 import HomePage from "./showcase/HomePage";
+import ComponentsHome from "./showcase/ComponentsHome";
 import ButtonDemo from "./showcase/ButtonDemo";
 import ModalDemo from "./showcase/ModalDemo";
 import TableDemo from "./showcase/TableDemo";
@@ -22,6 +23,7 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route element={<ShowcaseLayout />}>
+        <Route path="/components" element={<ComponentsHome />} />
         <Route path="/components/buttons" element={<ButtonDemo />} />
         <Route path="/components/primitives" element={<PrimitivesDemo />} />
         <Route path="/components/field-form" element={<FieldFormDemo />} />
