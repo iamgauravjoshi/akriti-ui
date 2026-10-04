@@ -25,7 +25,7 @@ const guides = [
 
 export default function DocsHome() {
   return (
-    <Stack gap={6}>
+    <Stack gap={6} className="max-w-3xl">
       <Text>
         Akriti UI is a themed, accessible React component library. This guide
         walks you from installation to custom themes, step by step. Start
