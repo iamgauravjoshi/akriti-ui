@@ -12,7 +12,6 @@ import { AlertCircle, AlertTriangle, CheckCircle, Info, X } from "lucide-react";
 import { cn } from "../../lib/cn";
 
 export type ToastType = "success" | "error" | "warning" | "info";
-export type ToastAnimation = "slide" | "fade";
 export type ToastPosition =
   | "top-right"
   | "top-left"
@@ -40,7 +39,6 @@ export type ToastRecord = {
 
 export type ToastConfig = {
   position: ToastPosition;
-  animation: ToastAnimation;
   autoClose: number;
   preventDuplicates: boolean;
   pauseOnHover: boolean;
@@ -72,7 +70,6 @@ export function useToast(): ToastContextValue {
 export type ToastProviderProps = {
   children: ReactNode;
   position?: ToastPosition;
-  animation?: ToastAnimation;
   autoClose?: number;
   preventDuplicates?: boolean;
   pauseOnHover?: boolean;
@@ -120,7 +117,6 @@ const positions: Record<ToastPosition, string> = {
 export function ToastProvider({
   children,
   position = "top-right",
-  animation = "slide",
   autoClose = 5000,
   preventDuplicates = false,
   pauseOnHover = true,
@@ -128,13 +124,14 @@ export function ToastProvider({
   const [toasts, setToasts] = useState<ToastRecord[]>([]);
   const [config, setConfig] = useState<ToastConfig>({
     position,
-    animation,
     autoClose,
     preventDuplicates,
     pauseOnHover,
   });
   const idRef = useRef(0);
   const pendingRemovals = useRef<Set<number>>(new Set());
+  const configRef = useRef(config);
+  configRef.current = config;
 
   useEffect(() => {
     const pending = pendingRemovals.current;
@@ -152,35 +149,37 @@ export function ToastProvider({
     pendingRemovals.current.add(timeout);
   }, []);
 
-  const addToast = useCallback(
-    (options: ToastOptions): string => {
-      if (config.preventDuplicates) {
-        const duplicate = toasts.find(
+  const addToast = useCallback((options: ToastOptions): string => {
+    const id = `toast-${++idRef.current}`;
+    let result = id;
+    setToasts((prev) => {
+      const cfg = configRef.current;
+      if (cfg.preventDuplicates) {
+        const duplicate = prev.find(
           (toast) =>
             toast.options.title === options.title &&
             toast.options.type === options.type,
         );
-        if (duplicate) return duplicate.id;
+        if (duplicate) {
+          result = duplicate.id;
+          return prev;
+        }
       }
-      const id = `toast-${++idRef.current}`;
-      setToasts((prev) =>
-        [
-          {
-            id,
-            options: {
-              duration: config.autoClose,
-              pauseOnHover: config.pauseOnHover,
-              ...options,
-            },
-            isExiting: false,
+      return [
+        {
+          id,
+          options: {
+            duration: cfg.autoClose,
+            pauseOnHover: cfg.pauseOnHover,
+            ...options,
           },
-          ...prev,
-        ].slice(0, 5),
-      );
-      return id;
-    },
-    [config.autoClose, config.pauseOnHover, config.preventDuplicates, toasts],
-  );
+          isExiting: false,
+        },
+        ...prev,
+      ].slice(0, 5);
+    });
+    return result;
+  }, []);
 
   const removeToast = useCallback(
     (id: string) => {
