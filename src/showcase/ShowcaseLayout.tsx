@@ -10,6 +10,7 @@ const links = [
   { to: "/form-demo", label: "Field Form" },
   { to: "/form-demo-02", label: "RHF Form" },
   { to: "/toast", label: "Toast" },
+  { to: "/primitives", label: "Primitives" },
 ];
 
 export function ShowcaseLayout() {

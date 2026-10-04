@@ -6,6 +6,7 @@ import TableDemo from "./showcase/TableDemo";
 import FieldFormDemo from "./showcase/FieldFormDemo";
 import RhfFormDemo from "./showcase/RhfFormDemo";
 import ToastDemo from "./showcase/ToastDemo";
+import PrimitivesDemo from "./showcase/PrimitivesDemo";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/form-demo" element={<FieldFormDemo />} />
         <Route path="/form-demo-02" element={<RhfFormDemo />} />
         <Route path="/toast" element={<ToastDemo />} />
+        <Route path="/primitives" element={<PrimitivesDemo />} />
       </Route>
     </Routes>
   );

@@ -61,6 +61,30 @@ export {
 
 export { Table, type TableProps, type TableColumn } from "./components/data-display/Table";
 
+export { Text, type TextProps, type TextTone, type TextSize } from "./components/typography/Text";
+export { Heading, type HeadingProps, type HeadingLevel } from "./components/typography/Heading";
+export { Code, type CodeProps } from "./components/typography/Code";
+export { Kbd, type KbdProps } from "./components/typography/Kbd";
+
+export {
+  Stack,
+  type StackProps,
+  type StackDirection,
+  type StackAlign,
+  type StackJustify,
+} from "./components/layout/Stack";
+export { Flex, type FlexProps } from "./components/layout/Flex";
+export {
+  Divider,
+  type DividerProps,
+  type DividerOrientation,
+} from "./components/layout/Divider";
+
+export {
+  VisuallyHidden,
+  type VisuallyHiddenProps,
+} from "./components/a11y/VisuallyHidden";
+
 export { Spinner, RingSpinner, type SpinnerProps } from "./components/feedback/Spinner";
 export {
   ToastProvider,
