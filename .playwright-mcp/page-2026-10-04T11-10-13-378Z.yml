@@ -1,0 +1,137 @@
+- generic [ref=f3e3]:
+  - complementary [ref=f3e4]:
+    - generic [aria-hidden] [ref=f3e8]: A
+    - navigation "Component sections" [ref=f3e10]:
+      - list [ref=f3e13]:
+        - listitem [ref=f3e14]:
+          - link "Home" [ref=f3e15] [cursor=pointer]:
+            - /url: /
+      - list [ref=f3e21]:
+        - listitem [ref=f3e22]:
+          - link "Buttons" [ref=f3e23] [cursor=pointer]:
+            - /url: /buttons
+        - listitem [ref=f3e31]:
+          - link "Primitives" [ref=f3e32] [cursor=pointer]:
+            - /url: /primitives
+      - list [ref=f3e37]:
+        - listitem [ref=f3e38]:
+          - link "Field Form" [ref=f3e39] [cursor=pointer]:
+            - /url: /form-demo
+        - listitem [ref=f3e43]:
+          - link "RHF Form" [ref=f3e44] [cursor=pointer]:
+            - /url: /form-demo-02
+        - listitem [ref=f3e49]:
+          - link "Inputs" [ref=f3e50] [cursor=pointer]:
+            - /url: /entry
+      - list [ref=f3e54]:
+        - listitem [ref=f3e55]:
+          - link "Table" [ref=f3e56] [cursor=pointer]:
+            - /url: /table
+        - listitem [ref=f3e59]:
+          - link "Data Table" [ref=f3e60] [cursor=pointer]:
+            - /url: /datatable
+        - listitem [ref=f3e65]:
+          - link "Display" [ref=f3e66] [cursor=pointer]:
+            - /url: /display
+      - list [ref=f3e74]:
+        - listitem [ref=f3e75]:
+          - link "Navigation" [ref=f3e76] [cursor=pointer]:
+            - /url: /navigation
+      - list [ref=f3e81]:
+        - listitem [ref=f3e82]:
+          - link "Modals" [ref=f3e83] [cursor=pointer]:
+            - /url: /modals
+        - listitem [ref=f3e86]:
+          - link "Overlays" [ref=f3e87] [cursor=pointer]:
+            - /url: /overlays
+      - list [ref=f3e94]:
+        - listitem [ref=f3e95]:
+          - link "Toast" [ref=f3e96] [cursor=pointer]:
+            - /url: /toast
+    - button "Expand navigation" [ref=f3e101]
+  - generic [ref=f3e105]:
+    - banner [ref=f3e106]:
+      - button "Toggle color theme" [ref=f3e108]
+    - main [ref=f3e115]:
+      - generic [ref=f3e116]:
+        - paragraph [ref=f3e117]: General
+        - heading "Buttons" [level=1] [ref=f3e118]
+        - paragraph [ref=f3e119]: Variants, intents, sizes, icons, and loading states.
+      - generic [ref=f3e121]:
+        - generic [ref=f3e122]:
+          - generic [ref=f3e123]:
+            - heading "Variants" [level=2] [ref=f3e124]
+            - paragraph [ref=f3e125]: Six visual styles for different emphasis.
+          - generic [ref=f3e127]:
+            - button "Primary" [ref=f3e128]
+            - button "Secondary" [ref=f3e129]
+            - button "Outline" [ref=f3e130]
+            - button "Ghost" [ref=f3e131]
+            - button "Text" [ref=f3e132]
+            - button "Link" [ref=f3e133]
+        - generic [ref=f3e134]:
+          - generic [ref=f3e135]:
+            - heading "Intents" [level=2] [ref=f3e136]
+            - paragraph [ref=f3e137]: Semantic coloring via intent.
+          - generic [ref=f3e139]:
+            - button "Default" [ref=f3e140]
+            - button "Success" [ref=f3e141]
+            - button "Warning" [ref=f3e142]
+            - button "Danger" [ref=f3e143]
+            - button "Info" [ref=f3e144]
+        - generic [ref=f3e145]:
+          - generic [ref=f3e146]:
+            - heading "Sizes" [level=2] [ref=f3e147]
+            - paragraph [ref=f3e148]: Five sizes from xs to xl.
+          - generic [ref=f3e150]:
+            - button "Extra Small" [ref=f3e151]
+            - button "Small" [ref=f3e152]
+            - button "Medium" [ref=f3e153]
+            - button "Large" [ref=f3e154]
+            - button "Extra Large" [ref=f3e155]
+        - generic [ref=f3e156]:
+          - generic [ref=f3e157]:
+            - heading "Icons and loading" [level=2] [ref=f3e158]
+            - paragraph [ref=f3e159]: Leading/trailing icons, async loading, and disabled states.
+          - generic [ref=f3e161]:
+            - button [ref=f3e162]
+            - button [ref=f3e167]
+            - button [ref=f3e171]
+            - button [ref=f3e174]
+            - button [ref=f3e180]
+            - button [ref=f3e185]
+            - button [ref=f3e190]
+            - button [ref=f3e195]
+            - button [ref=f3e203]
+            - button "Primary action" [ref=f3e208]
+            - button "Disabled" [disabled]
+            - button "Full width" [ref=f3e209]
+        - generic [ref=f3e210]:
+          - generic [ref=f3e211]:
+            - heading "Icon and close buttons" [level=2] [ref=f3e212]
+            - paragraph [ref=f3e213]: Square icon actions.
+          - generic [ref=f3e215]:
+            - button "Settings" [ref=f3e216]
+            - button "Close" [ref=f3e220]
+            - button "Close" [ref=f3e224]
+        - generic [ref=f3e228]:
+          - generic [ref=f3e229]:
+            - heading "Switch" [level=2] [ref=f3e230]
+            - paragraph [ref=f3e231]: Toggles with intents and loading.
+          - generic [ref=f3e233]:
+            - generic [ref=f3e234]:
+              - switch "Notifications" [checked] [ref=f3e235] [cursor=pointer]
+              - generic [ref=f3e236]: Notifications
+            - generic [ref=f3e237]:
+              - switch "Success" [checked] [ref=f3e238] [cursor=pointer]
+              - generic [ref=f3e239]: Success
+            - generic [ref=f3e240]:
+              - switch "Disabled" [checked] [disabled] [ref=f3e241]
+              - generic [ref=f3e242]: Disabled
+            - generic [ref=f3e243]:
+              - switch "Loading" [checked] [disabled] [ref=f3e244]
+              - generic [ref=f3e245]: Loading
+    - contentinfo [ref=f3e246]:
+      - text: Akriti UI component showcase — import from
+      - code [ref=f3e247]: akriti-ui
+      - text: .

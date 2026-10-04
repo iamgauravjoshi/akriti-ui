@@ -1,0 +1,115 @@
+- generic [ref=f4e3]:
+  - complementary [ref=f4e4]:
+    - generic [aria-hidden] [ref=f4e8]: A
+    - navigation "Component sections" [ref=f4e10]:
+      - list [ref=f4e13]:
+        - listitem [ref=f4e14]:
+          - link "Home" [ref=f4e15] [cursor=pointer]:
+            - /url: /
+      - list [ref=f4e21]:
+        - listitem [ref=f4e22]:
+          - link "Buttons" [ref=f4e23] [cursor=pointer]:
+            - /url: /buttons
+        - listitem [ref=f4e30]:
+          - link "Primitives" [ref=f4e31] [cursor=pointer]:
+            - /url: /primitives
+      - list [ref=f4e36]:
+        - listitem [ref=f4e37]:
+          - link "Field Form" [ref=f4e38] [cursor=pointer]:
+            - /url: /form-demo
+        - listitem [ref=f4e42]:
+          - link "RHF Form" [ref=f4e43] [cursor=pointer]:
+            - /url: /form-demo-02
+        - listitem [ref=f4e48]:
+          - link "Inputs" [ref=f4e49] [cursor=pointer]:
+            - /url: /entry
+      - list [ref=f4e53]:
+        - listitem [ref=f4e54]:
+          - link "Table" [ref=f4e55] [cursor=pointer]:
+            - /url: /table
+        - listitem [ref=f4e58]:
+          - link "Data Table" [ref=f4e59] [cursor=pointer]:
+            - /url: /datatable
+        - listitem [ref=f4e64]:
+          - link "Display" [ref=f4e65] [cursor=pointer]:
+            - /url: /display
+      - list [ref=f4e74]:
+        - listitem [ref=f4e75]:
+          - link "Navigation" [ref=f4e76] [cursor=pointer]:
+            - /url: /navigation
+      - list [ref=f4e81]:
+        - listitem [ref=f4e82]:
+          - link "Modals" [ref=f4e83] [cursor=pointer]:
+            - /url: /modals
+        - listitem [ref=f4e86]:
+          - link "Overlays" [ref=f4e87] [cursor=pointer]:
+            - /url: /overlays
+      - list [ref=f4e94]:
+        - listitem [ref=f4e95]:
+          - link "Toast" [ref=f4e96] [cursor=pointer]:
+            - /url: /toast
+    - button "Expand navigation" [ref=f4e101]
+  - generic [ref=f4e105]:
+    - banner [ref=f4e106]:
+      - button "Toggle color theme" [ref=f4e108]
+    - main [ref=f4e115]:
+      - generic [ref=f4e116]:
+        - paragraph [ref=f4e117]: Display
+        - heading "Display" [level=1] [ref=f4e118]
+        - paragraph [ref=f4e119]: Card, Badge, Tag, Avatar, Alert, Progress, and Empty.
+      - generic [ref=f4e121]:
+        - generic [ref=f4e122]:
+          - generic [ref=f4e123]:
+            - heading "Card" [level=2] [ref=f4e124]
+            - paragraph [ref=f4e125]: Compound sections for headers, content, and footers.
+          - generic [ref=f4e127]:
+            - generic [ref=f4e128]:
+              - heading "Project Alpha" [level=3] [ref=f4e129]
+              - paragraph [ref=f4e130]: Q4 deliverables and milestones.
+            - generic [ref=f4e131]:
+              - text: Shipped 12 of 15 milestones this quarter.
+              - progressbar [ref=f4e133]:
+                - generic [ref=f4e136]: 80%
+            - generic [ref=f4e137]: On track
+        - generic [ref=f4e139]:
+          - generic [ref=f4e140]:
+            - heading "Badge, Tag, Avatar" [level=2] [ref=f4e141]
+            - paragraph [ref=f4e142]: Status markers, removable pills, and identity fallbacks.
+          - generic [ref=f4e144]:
+            - generic [ref=f4e145]:
+              - img "Ada Lovelace" [ref=f4e146]: AL
+              - generic [ref=f4e147]: "5"
+            - img "Alan Turing" [ref=f4e149]: AT
+            - generic [ref=f4e151]: Beta
+            - generic [ref=f4e152]:
+              - text: Blocking
+              - button "Remove tag" [ref=f4e153]
+        - generic [ref=f4e157]:
+          - generic [ref=f4e158]:
+            - heading "Alert" [level=2] [ref=f4e159]
+            - paragraph [ref=f4e160]: Semantic callouts with actions.
+          - generic [ref=f4e162]:
+            - alert [ref=f4e163]:
+              - generic [ref=f4e167]:
+                - paragraph [ref=f4e168]: Heads up
+                - generic [ref=f4e169]: Deployments resume at 09:00 UTC.
+            - alert [ref=f4e170]:
+              - generic [ref=f4e174]:
+                - paragraph [ref=f4e175]: Degraded
+                - generic [ref=f4e176]: Search latency is elevated in one region.
+              - button "Dismiss alert" [ref=f4e177]
+            - alert [ref=f4e181]:
+              - generic [ref=f4e185]:
+                - paragraph [ref=f4e186]: Failed
+                - generic [ref=f4e187]: The nightly backup did not complete.
+        - generic [ref=f4e188]:
+          - generic [ref=f4e189]:
+            - heading "Skeleton, Empty" [level=2] [ref=f4e190]
+            - paragraph [ref=f4e191]: Loading placeholders and empty states.
+          - generic [ref=f4e197]:
+            - paragraph [ref=f4e202]: No projects yet
+            - paragraph [ref=f4e203]: Create your first project to get started.
+    - contentinfo [ref=f4e204]:
+      - text: Akriti UI component showcase — import from
+      - code [ref=f4e205]: akriti-ui
+      - text: .

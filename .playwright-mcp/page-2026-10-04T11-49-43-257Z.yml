@@ -1,0 +1,144 @@
+- generic [ref=f5e3]:
+  - banner [ref=f5e4]:
+    - generic [ref=f5e5]:
+      - link "Akriti UI home" [ref=f5e6] [cursor=pointer]:
+        - /url: /
+        - generic [aria-hidden] [ref=f5e7]: A
+        - generic [ref=f5e8]:
+          - generic [ref=f5e9]: Akriti UI
+          - generic [ref=f5e10]: v0.1.0 · pre-release
+      - navigation "Primary" [ref=f5e11]:
+        - link "Home" [ref=f5e12] [cursor=pointer]:
+          - /url: /
+        - link "Components" [ref=f5e13] [cursor=pointer]:
+          - /url: /components
+        - link "Docs" [ref=f5e14] [cursor=pointer]:
+          - /url: /docs
+      - generic [ref=f5e15]:
+        - button "Search components and docs" [ref=f5e16]:
+          - generic [ref=f5e20]: Search…
+          - generic [ref=f5e21]: ⌘K
+        - link "Akriti UI on GitHub" [ref=f5e22] [cursor=pointer]:
+          - /url: https://github.com/iamgauravjoshi/akriti-ui
+        - button "Toggle color theme" [ref=f5e26]
+    - navigation "Primary mobile" [ref=f5e29]:
+      - link "Home" [ref=f5e30] [cursor=pointer]:
+        - /url: /
+      - link "Components" [ref=f5e31] [cursor=pointer]:
+        - /url: /components
+      - link "Docs" [ref=f5e32] [cursor=pointer]:
+        - /url: /docs
+  - main [ref=f5e33]:
+    - generic [ref=f5e34]:
+      - generic [ref=f5e40]:
+        - generic [ref=f5e41]: v0.1.0 · pre-release
+        - heading "Interfaces that feel inevitable" [level=1] [ref=f5e45]
+        - generic [ref=f5e46]: Akriti UI is a themed, accessible React component system with semantic design tokens and strict TypeScript APIs.
+        - generic [ref=f5e48]:
+          - code [ref=f5e49]: npm install akriti-ui
+          - button "Copy install command" [ref=f5e50]
+        - generic [ref=f5e54]:
+          - button "Explore components" [ref=f5e55]
+          - button "Live demos" [ref=f5e58]
+        - generic [ref=f5e61]:
+          - generic [ref=f5e62]:
+            - paragraph [ref=f5e63]: 0+
+            - paragraph [ref=f5e64]: Components
+          - generic [ref=f5e65]:
+            - paragraph [ref=f5e66]: "0"
+            - paragraph [ref=f5e67]: Semantic tokens
+          - generic [ref=f5e68]:
+            - paragraph [ref=f5e69]: "0"
+            - paragraph [ref=f5e70]: Theme modes
+      - generic [ref=f5e72]:
+        - generic [ref=f5e74]:
+          - heading "Semantic theming" [level=3] [ref=f5e83]
+          - generic [ref=f5e84]: Token-driven light, dark, and system modes with runtime overrides through CSS variables.
+        - generic [ref=f5e86]:
+          - heading "Accessible by default" [level=3] [ref=f5e91]
+          - generic [ref=f5e92]: Radix primitives, keyboard support, focus management, and ARIA semantics built in.
+        - generic [ref=f5e94]:
+          - heading "Strict TypeScript" [level=3] [ref=f5e100]
+          - generic [ref=f5e101]: Typed props, generics for tables and forms, and shipped declaration files.
+        - generic [ref=f5e103]:
+          - heading "Tree-shakable" [level=3] [ref=f5e110]
+          - generic [ref=f5e111]: One barrel entry, side-effect-free modules, and a single scoped stylesheet.
+      - generic [ref=f5e113]:
+        - generic [ref=f5e114]:
+          - heading "Component catalog" [level=2] [ref=f5e115]
+          - text: Every component below is live — open a page to interact with it in both themes.
+        - generic [ref=f5e116]:
+          - link "Buttons Variants, intents, sizes, loading states." [ref=f5e118] [cursor=pointer]:
+            - /url: /components/buttons
+            - generic [ref=f5e120]:
+              - heading "Buttons" [level=3] [ref=f5e128]
+              - generic [ref=f5e131]: Variants, intents, sizes, loading states.
+          - link "Primitives Typography, Stack, Flex, Divider." [ref=f5e133] [cursor=pointer]:
+            - /url: /components/primitives
+            - generic [ref=f5e135]:
+              - heading "Primitives" [level=3] [ref=f5e139]
+              - generic [ref=f5e142]: Typography, Stack, Flex, Divider.
+          - link "Display Card, Badge, Tag, Avatar, Alert, Progress." [ref=f5e144] [cursor=pointer]:
+            - /url: /components/display
+            - generic [ref=f5e146]:
+              - heading "Display" [level=3] [ref=f5e153]
+              - generic [ref=f5e156]: Card, Badge, Tag, Avatar, Alert, Progress.
+          - link "Field Form Schema-driven forms with validation." [ref=f5e158] [cursor=pointer]:
+            - /url: /components/field-form
+            - generic [ref=f5e160]:
+              - heading "Field Form" [level=3] [ref=f5e165]
+              - generic [ref=f5e168]: Schema-driven forms with validation.
+          - link "RHF Form React Hook Form integration." [ref=f5e170] [cursor=pointer]:
+            - /url: /components/rhf-form
+            - generic [ref=f5e172]:
+              - heading "RHF Form" [level=3] [ref=f5e178]
+              - generic [ref=f5e181]: React Hook Form integration.
+          - link "Inputs Slider, Combobox, DatePicker, OTP, Upload." [ref=f5e183] [cursor=pointer]:
+            - /url: /components/inputs
+            - generic [ref=f5e185]:
+              - heading "Inputs" [level=3] [ref=f5e188]
+              - generic [ref=f5e191]: Slider, Combobox, DatePicker, OTP, Upload.
+          - link "Table Sortable, filterable data table." [ref=f5e193] [cursor=pointer]:
+            - /url: /components/table
+            - generic [ref=f5e195]:
+              - heading "Table" [level=3] [ref=f5e199]
+              - generic [ref=f5e202]: Sortable, filterable data table.
+          - link "Data Table Typed columns, search, selection." [ref=f5e204] [cursor=pointer]:
+            - /url: /components/datatable
+            - generic [ref=f5e206]:
+              - heading "Data Table" [level=3] [ref=f5e212]
+              - generic [ref=f5e215]: Typed columns, search, selection.
+          - link "Navigation Tabs, Accordion, Breadcrumb, Pagination." [ref=f5e217] [cursor=pointer]:
+            - /url: /components/navigation
+            - generic [ref=f5e219]:
+              - heading "Navigation" [level=3] [ref=f5e223]
+              - generic [ref=f5e226]: Tabs, Accordion, Breadcrumb, Pagination.
+          - link "Overlays Tooltip, Popover, Drawer, menus." [ref=f5e228] [cursor=pointer]:
+            - /url: /components/overlays
+            - generic [ref=f5e230]:
+              - heading "Overlays" [level=3] [ref=f5e236]
+              - generic [ref=f5e239]: Tooltip, Popover, Drawer, menus.
+          - link "Modals Dialogs and confirmation flows." [ref=f5e241] [cursor=pointer]:
+            - /url: /components/modals
+            - generic [ref=f5e243]:
+              - heading "Modals" [level=3] [ref=f5e247]
+              - generic [ref=f5e250]: Dialogs and confirmation flows.
+          - link "Toast Notifications with progress and pause." [ref=f5e252] [cursor=pointer]:
+            - /url: /components/toast
+            - generic [ref=f5e254]:
+              - heading "Toast" [level=3] [ref=f5e259]
+              - generic [ref=f5e262]: Notifications with progress and pause.
+      - generic [ref=f5e264]:
+        - generic [ref=f5e265]:
+          - generic [ref=f5e266]: Developer experience
+          - heading "Install it. Import it. Ship it." [level=2] [ref=f5e267]
+          - generic [ref=f5e268]: One package, one stylesheet, zero configuration. Tokens adapt to light and dark automatically.
+          - button "See components in action" [ref=f5e270]
+        - code [ref=f5e275]:
+          - text: "import { Button, Card } from 'akriti-ui'; import 'akriti-ui/style.css'; <Card> <Button intent="
+          - generic [ref=f5e276]: "\"success\","
+          - text: ">Save changes</Button> </Card>"
+  - contentinfo [ref=f5e277]:
+    - text: Akriti UI component showcase — import from
+    - code [ref=f5e278]: akriti-ui
+    - text: .

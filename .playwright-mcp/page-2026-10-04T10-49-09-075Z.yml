@@ -1,0 +1,109 @@
+- generic [ref=f1e3]:
+  - complementary [ref=f1e4]:
+    - generic [ref=f1e7]:
+      - generic [aria-hidden] [ref=f1e8]: A
+      - generic [ref=f1e9]:
+        - generic [ref=f1e10]: Akriti UI
+        - generic [ref=f1e11]: v0.1.0 · pre-release
+    - navigation "Component sections" [ref=f1e13]:
+      - generic [ref=f1e14]:
+        - paragraph [ref=f1e15]: Overview
+        - list [ref=f1e16]:
+          - listitem [ref=f1e17]:
+            - link "Home" [ref=f1e18] [cursor=pointer]:
+              - /url: /
+      - generic [ref=f1e24]:
+        - paragraph [ref=f1e25]: General
+        - list [ref=f1e26]:
+          - listitem [ref=f1e27]:
+            - link "Buttons" [ref=f1e28] [cursor=pointer]:
+              - /url: /buttons
+          - listitem [ref=f1e36]:
+            - link "Primitives" [ref=f1e37] [cursor=pointer]:
+              - /url: /primitives
+      - generic [ref=f1e41]:
+        - paragraph [ref=f1e42]: Forms
+        - list [ref=f1e43]:
+          - listitem [ref=f1e44]:
+            - link "Field Form" [ref=f1e45] [cursor=pointer]:
+              - /url: /form-demo
+          - listitem [ref=f1e50]:
+            - link "RHF Form" [active] [ref=f1e51] [cursor=pointer]:
+              - /url: /form-demo-02
+          - listitem [ref=f1e57]:
+            - link "Inputs" [ref=f1e58] [cursor=pointer]:
+              - /url: /entry
+      - generic [ref=f1e61]:
+        - paragraph [ref=f1e62]: Display
+        - list [ref=f1e63]:
+          - listitem [ref=f1e64]:
+            - link "Table" [ref=f1e65] [cursor=pointer]:
+              - /url: /table
+          - listitem [ref=f1e69]:
+            - link "Data Table" [ref=f1e70] [cursor=pointer]:
+              - /url: /datatable
+          - listitem [ref=f1e76]:
+            - link "Display" [ref=f1e77] [cursor=pointer]:
+              - /url: /display
+      - generic [ref=f1e84]:
+        - paragraph [ref=f1e85]: Navigation
+        - list [ref=f1e86]:
+          - listitem [ref=f1e87]:
+            - link "Navigation" [ref=f1e88] [cursor=pointer]:
+              - /url: /navigation
+      - generic [ref=f1e92]:
+        - paragraph [ref=f1e93]: Overlays
+        - list [ref=f1e94]:
+          - listitem [ref=f1e95]:
+            - link "Modals" [ref=f1e96] [cursor=pointer]:
+              - /url: /modals
+          - listitem [ref=f1e100]:
+            - link "Overlays" [ref=f1e101] [cursor=pointer]:
+              - /url: /overlays
+      - generic [ref=f1e107]:
+        - paragraph [ref=f1e108]: Feedback
+        - list [ref=f1e109]:
+          - listitem [ref=f1e110]:
+            - link "Toast" [ref=f1e111] [cursor=pointer]:
+              - /url: /toast
+    - button "Collapse navigation" [expanded] [ref=f1e117]:
+      - generic [ref=f1e121]: Collapse
+  - generic [ref=f1e122]:
+    - banner [ref=f1e123]:
+      - button "Toggle color theme" [ref=f1e125]
+    - main [ref=f1e132]:
+      - generic [ref=f1e380]:
+        - paragraph [ref=f1e381]: Forms
+        - heading "RHF Form" [level=1] [ref=f1e382]
+        - paragraph [ref=f1e383]: React Hook Form integration with accessible fields.
+      - generic [ref=f1e385]:
+        - heading "React Hook Form + Zod" [level=1] [ref=f1e386]
+        - paragraph [ref=f1e387]: Compound FormField API. Prefer this over schema FieldForm for application screens.
+        - generic [ref=f1e388]:
+          - generic [ref=f1e389]:
+            - generic [ref=f1e390]: Name*
+            - textbox "Name" [ref=f1e392]:
+              - /placeholder: Ada Lovelace
+          - generic [ref=f1e393]:
+            - generic [ref=f1e394]: Email*
+            - textbox "Email" [ref=f1e396]:
+              - /placeholder: ada@example.com
+            - paragraph [ref=f1e397]: We will never share your email.
+          - generic [ref=f1e398]:
+            - generic [ref=f1e399]: Password*
+            - generic [ref=f1e400]:
+              - textbox "Password" [ref=f1e401]
+              - button "Show password" [ref=f1e403]
+          - generic [ref=f1e407]:
+            - generic [ref=f1e408]: Role*
+            - combobox [ref=f1e411] [cursor=pointer]:
+              - generic [ref=f1e412]: Select a role
+          - generic [ref=f1e418]:
+            - generic [ref=f1e419]: Bio
+            - textbox "Bio" [ref=f1e421]:
+              - /placeholder: Optional notes
+          - button "Save profile" [ref=f1e422]
+    - contentinfo [ref=f1e377]:
+      - text: Akriti UI component showcase — import from
+      - code [ref=f1e378]: akriti-ui
+      - text: .

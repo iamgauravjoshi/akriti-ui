@@ -1,0 +1,131 @@
+- generic [ref=f7e3]:
+  - banner [ref=f7e4]:
+    - generic [ref=f7e5]:
+      - link "Akriti UI home" [ref=f7e6] [cursor=pointer]:
+        - /url: /
+        - generic [aria-hidden] [ref=f7e7]: A
+        - generic [ref=f7e8]:
+          - generic [ref=f7e9]: Akriti UI
+          - generic [ref=f7e10]: v0.1.0 · pre-release
+      - navigation "Primary" [ref=f7e11]:
+        - link "Home" [ref=f7e12] [cursor=pointer]:
+          - /url: /
+        - link "Components" [ref=f7e13] [cursor=pointer]:
+          - /url: /components
+        - link "Docs" [ref=f7e14] [cursor=pointer]:
+          - /url: /docs
+      - generic [ref=f7e15]:
+        - button "Search components and docs" [ref=f7e16]:
+          - generic [ref=f7e20]: Search…
+          - generic [ref=f7e21]: ⌘K
+        - link "Akriti UI on GitHub" [ref=f7e22] [cursor=pointer]:
+          - /url: https://github.com/iamgauravjoshi/akriti-ui
+        - button "Toggle color theme" [ref=f7e26]
+    - navigation "Primary mobile" [ref=f7e29]:
+      - link "Home" [ref=f7e30] [cursor=pointer]:
+        - /url: /
+      - link "Components" [ref=f7e31] [cursor=pointer]:
+        - /url: /components
+      - link "Docs" [ref=f7e32] [cursor=pointer]:
+        - /url: /docs
+  - generic [ref=f7e33]:
+    - complementary [ref=f7e34]:
+      - navigation "Section navigation" [ref=f7e36]:
+        - generic [ref=f7e37]:
+          - paragraph [ref=f7e38]: Guides
+          - list [ref=f7e39]:
+            - listitem [ref=f7e40]:
+              - link "Overview" [ref=f7e41] [cursor=pointer]:
+                - /url: /docs
+            - listitem [ref=f7e45]:
+              - link "Getting Started" [ref=f7e46] [cursor=pointer]:
+                - /url: /docs/getting-started
+            - listitem [ref=f7e53]:
+              - link "Theming" [ref=f7e54] [cursor=pointer]:
+                - /url: /docs/theming
+      - button "Collapse navigation" [expanded] [ref=f7e64]:
+        - generic [ref=f7e68]: Collapse
+    - generic [ref=f7e69]:
+      - main [ref=f7e70]:
+        - generic [ref=f7e71]:
+          - paragraph [ref=f7e72]: Guides
+          - heading "Theming" [level=1] [ref=f7e73]
+          - paragraph [ref=f7e74]: Tokens, dark mode, and custom themes.
+        - generic [ref=f7e76]:
+          - generic [ref=f7e77]:
+            - heading "1. Semantic tokens" [level=2] [ref=f7e78]
+            - generic [ref=f7e79]:
+              - text: Components never hard-code colors — they reference
+              - code [ref=f7e80]: "--ak-*"
+              - text: "variables that flip per theme. Try the toggle: every demo on this site re-themes instantly."
+            - generic [ref=f7e82]:
+              - heading "Live theme switch" [level=2] [ref=f7e84]
+              - generic [ref=f7e86]:
+                - button "Light" [ref=f7e87]
+                - button "Dark" [ref=f7e88]
+                - button "System (light)" [ref=f7e89]
+            - generic [ref=f7e90]:
+              - generic [ref=f7e91]:
+                - paragraph [ref=f7e92]: Surfaces
+                - list [ref=f7e93]:
+                  - listitem [ref=f7e94]:
+                    - code [ref=f7e95]: "--ak-background"
+                  - listitem [ref=f7e96]:
+                    - code [ref=f7e97]: "--ak-foreground"
+                  - listitem [ref=f7e98]:
+                    - code [ref=f7e99]: "--ak-surface"
+                  - listitem [ref=f7e100]:
+                    - code [ref=f7e101]: "--ak-muted"
+                  - listitem [ref=f7e102]:
+                    - code [ref=f7e103]: "--ak-border"
+              - generic [ref=f7e104]:
+                - paragraph [ref=f7e105]: Brand
+                - list [ref=f7e106]:
+                  - listitem [ref=f7e107]:
+                    - code [ref=f7e108]: "--ak-primary"
+                  - listitem [ref=f7e109]:
+                    - code [ref=f7e110]: "--ak-primary-hover"
+                  - listitem [ref=f7e111]:
+                    - code [ref=f7e112]: "--ak-secondary"
+              - generic [ref=f7e113]:
+                - paragraph [ref=f7e114]: Semantics
+                - list [ref=f7e115]:
+                  - listitem [ref=f7e116]:
+                    - code [ref=f7e117]: "--ak-success"
+                  - listitem [ref=f7e118]:
+                    - code [ref=f7e119]: "--ak-warning"
+                  - listitem [ref=f7e120]:
+                    - code [ref=f7e121]: "--ak-danger"
+                  - listitem [ref=f7e122]:
+                    - code [ref=f7e123]: "--ak-info"
+              - generic [ref=f7e124]:
+                - paragraph [ref=f7e125]: Shape
+                - list [ref=f7e126]:
+                  - listitem [ref=f7e127]:
+                    - code [ref=f7e128]: "--ak-radius-sm"
+                  - listitem [ref=f7e129]:
+                    - code [ref=f7e130]: "--ak-radius-md"
+                  - listitem [ref=f7e131]:
+                    - code [ref=f7e132]: "--ak-shadow-md"
+                  - listitem [ref=f7e133]:
+                    - code [ref=f7e134]: "--ak-z-toast"
+          - generic [ref=f7e135]:
+            - heading "2. Custom themes" [level=2] [ref=f7e136]
+            - generic [ref=f7e137]:
+              - text: Pass flat token keys or nested sections to
+              - code [ref=f7e138]: createTheme
+              - text: and hand the result to
+              - code [ref=f7e139]: ThemeProvider
+              - text: . Flat keys win over section values.
+            - generic [ref=f7e141]:
+              - generic [ref=f7e142]: src/theme.ts
+              - code [ref=f7e144]: "import { createTheme } from \"akriti-ui\"; export const theme = createTheme({ colors: { primary: \"#635bff\" }, radius: { radiusMd: \"10px\" }, });"
+            - generic [ref=f7e146]:
+              - heading "Try a primary color" [level=2] [ref=f7e148]
+              - generic [ref=f7e150]:
+                - textbox "Pick a primary color" [ref=f7e151] [cursor=pointer]: "#635bff"
+                - code [ref=f7e152]: "#635bff"
+      - contentinfo [ref=f7e154]:
+        - text: Akriti UI component showcase — import from
+        - code [ref=f7e155]: akriti-ui
+        - text: .

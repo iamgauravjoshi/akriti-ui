@@ -1,0 +1,173 @@
+- generic [ref=f6e3]:
+  - banner [ref=f6e4]:
+    - generic [ref=f6e5]:
+      - link "Akriti UI home" [ref=f6e6] [cursor=pointer]:
+        - /url: /
+        - generic [aria-hidden] [ref=f6e7]: A
+        - generic [ref=f6e8]:
+          - generic [ref=f6e9]: Akriti UI
+          - generic [ref=f6e10]: v0.1.0 · pre-release
+      - navigation "Primary" [ref=f6e11]:
+        - link "Home" [ref=f6e12] [cursor=pointer]:
+          - /url: /
+        - link "Components" [ref=f6e13] [cursor=pointer]:
+          - /url: /components
+        - link "Docs" [ref=f6e14] [cursor=pointer]:
+          - /url: /docs
+      - generic [ref=f6e15]:
+        - button "Search components and docs" [ref=f6e16]:
+          - generic [ref=f6e20]: Search…
+          - generic [ref=f6e21]: ⌘K
+        - link "Akriti UI on GitHub" [ref=f6e22] [cursor=pointer]:
+          - /url: https://github.com/iamgauravjoshi/akriti-ui
+        - button "Toggle color theme" [ref=f6e26]
+    - navigation "Primary mobile" [ref=f6e29]:
+      - link "Home" [ref=f6e30] [cursor=pointer]:
+        - /url: /
+      - link "Components" [ref=f6e31] [cursor=pointer]:
+        - /url: /components
+      - link "Docs" [ref=f6e32] [cursor=pointer]:
+        - /url: /docs
+  - generic [ref=f6e33]:
+    - complementary [ref=f6e34]:
+      - navigation "Section navigation" [ref=f6e36]:
+        - generic [ref=f6e37]:
+          - paragraph [ref=f6e38]: General
+          - list [ref=f6e39]:
+            - listitem [ref=f6e40]:
+              - link "Buttons" [ref=f6e41] [cursor=pointer]:
+                - /url: /components/buttons
+            - listitem [ref=f6e50]:
+              - link "Primitives" [ref=f6e51] [cursor=pointer]:
+                - /url: /components/primitives
+        - generic [ref=f6e55]:
+          - paragraph [ref=f6e56]: Forms
+          - list [ref=f6e57]:
+            - listitem [ref=f6e58]:
+              - link "Field Form" [ref=f6e59] [cursor=pointer]:
+                - /url: /components/field-form
+            - listitem [ref=f6e64]:
+              - link "RHF Form" [ref=f6e65] [cursor=pointer]:
+                - /url: /components/rhf-form
+            - listitem [ref=f6e71]:
+              - link "Inputs" [ref=f6e72] [cursor=pointer]:
+                - /url: /components/inputs
+        - generic [ref=f6e75]:
+          - paragraph [ref=f6e76]: Display
+          - list [ref=f6e77]:
+            - listitem [ref=f6e78]:
+              - link "Table" [ref=f6e79] [cursor=pointer]:
+                - /url: /components/table
+            - listitem [ref=f6e83]:
+              - link "Data Table" [ref=f6e84] [cursor=pointer]:
+                - /url: /components/data-table
+            - listitem [ref=f6e90]:
+              - link "Display" [ref=f6e91] [cursor=pointer]:
+                - /url: /components/display
+        - generic [ref=f6e98]:
+          - paragraph [ref=f6e99]: Navigation
+          - list [ref=f6e100]:
+            - listitem [ref=f6e101]:
+              - link "Navigation" [ref=f6e102] [cursor=pointer]:
+                - /url: /components/navigation
+        - generic [ref=f6e106]:
+          - paragraph [ref=f6e107]: Overlays
+          - list [ref=f6e108]:
+            - listitem [ref=f6e109]:
+              - link "Modals" [ref=f6e110] [cursor=pointer]:
+                - /url: /components/modals
+            - listitem [ref=f6e114]:
+              - link "Overlays" [ref=f6e115] [cursor=pointer]:
+                - /url: /components/overlays
+        - generic [ref=f6e121]:
+          - paragraph [ref=f6e122]: Feedback
+          - list [ref=f6e123]:
+            - listitem [ref=f6e124]:
+              - link "Toast" [ref=f6e125] [cursor=pointer]:
+                - /url: /components/toast
+      - button "Collapse navigation" [expanded] [ref=f6e131]:
+        - generic [ref=f6e135]: Collapse
+    - generic [ref=f6e136]:
+      - main [ref=f6e137]:
+        - generic [ref=f6e138]:
+          - paragraph [ref=f6e139]: General
+          - heading "Buttons" [level=1] [ref=f6e140]
+          - paragraph [ref=f6e141]: Variants, intents, sizes, icons, and loading states.
+        - generic [ref=f6e143]:
+          - generic [ref=f6e144]:
+            - generic [ref=f6e145]:
+              - heading "Variants" [level=2] [ref=f6e146]
+              - paragraph [ref=f6e147]: Six visual styles for different emphasis.
+            - generic [ref=f6e149]:
+              - button "Primary" [ref=f6e150]
+              - button "Secondary" [ref=f6e151]
+              - button "Outline" [ref=f6e152]
+              - button "Ghost" [ref=f6e153]
+              - button "Text" [ref=f6e154]
+              - button "Link" [ref=f6e155]
+          - generic [ref=f6e156]:
+            - generic [ref=f6e157]:
+              - heading "Intents" [level=2] [ref=f6e158]
+              - paragraph [ref=f6e159]: Semantic coloring via intent.
+            - generic [ref=f6e161]:
+              - button "Default" [ref=f6e162]
+              - button "Success" [ref=f6e163]
+              - button "Warning" [ref=f6e164]
+              - button "Danger" [ref=f6e165]
+              - button "Info" [ref=f6e166]
+          - generic [ref=f6e167]:
+            - generic [ref=f6e168]:
+              - heading "Sizes" [level=2] [ref=f6e169]
+              - paragraph [ref=f6e170]: Five sizes from xs to xl.
+            - generic [ref=f6e172]:
+              - button "Extra Small" [ref=f6e173]
+              - button "Small" [ref=f6e174]
+              - button "Medium" [ref=f6e175]
+              - button "Large" [ref=f6e176]
+              - button "Extra Large" [ref=f6e177]
+          - generic [ref=f6e178]:
+            - generic [ref=f6e179]:
+              - heading "Icons and loading" [level=2] [ref=f6e180]
+              - paragraph [ref=f6e181]: Leading/trailing icons, async loading, and disabled states.
+            - generic [ref=f6e183]:
+              - button [ref=f6e184]
+              - button [ref=f6e189]
+              - button [ref=f6e193]
+              - button [ref=f6e196]
+              - button [ref=f6e202]
+              - button [ref=f6e207]
+              - button [ref=f6e212]
+              - button [ref=f6e217]
+              - button [ref=f6e225]
+              - button "Primary action" [ref=f6e230]
+              - button "Disabled" [disabled]
+              - button "Full width" [ref=f6e231]
+          - generic [ref=f6e232]:
+            - generic [ref=f6e233]:
+              - heading "Icon and close buttons" [level=2] [ref=f6e234]
+              - paragraph [ref=f6e235]: Square icon actions.
+            - generic [ref=f6e237]:
+              - button "Settings" [ref=f6e238]
+              - button "Close" [ref=f6e242]
+              - button "Close" [ref=f6e246]
+          - generic [ref=f6e250]:
+            - generic [ref=f6e251]:
+              - heading "Switch" [level=2] [ref=f6e252]
+              - paragraph [ref=f6e253]: Toggles with intents and loading.
+            - generic [ref=f6e255]:
+              - generic [ref=f6e256]:
+                - switch "Notifications" [checked] [ref=f6e257] [cursor=pointer]
+                - generic [ref=f6e258]: Notifications
+              - generic [ref=f6e259]:
+                - switch "Success" [checked] [ref=f6e260] [cursor=pointer]
+                - generic [ref=f6e261]: Success
+              - generic [ref=f6e262]:
+                - switch "Disabled" [checked] [disabled] [ref=f6e263]
+                - generic [ref=f6e264]: Disabled
+              - generic [ref=f6e265]:
+                - switch "Loading" [checked] [disabled] [ref=f6e266]
+                - generic [ref=f6e267]: Loading
+      - contentinfo [ref=f6e268]:
+        - text: Akriti UI component showcase — import from
+        - code [ref=f6e269]: akriti-ui
+        - text: .
