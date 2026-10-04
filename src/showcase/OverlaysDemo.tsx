@@ -8,19 +8,21 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-  Heading,
   Popover,
   Stack,
   Text,
   Tooltip,
 } from "..";
+import { Example } from "./Example";
 
 export default function OverlaysDemo() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   return (
-    <Stack gap={8}>
-      <section>
-        <Heading level={2}>Tooltip & Popover</Heading>
+    <Stack gap={6}>
+      <Example
+        title="Tooltip & Popover"
+        description="Hover hints and anchored rich content."
+      >
         <Stack direction="row" gap={3} align="center">
           <Tooltip content="Saved automatically">
             <Button variant="outline">Hover or focus me</Button>
@@ -31,18 +33,16 @@ export default function OverlaysDemo() {
             </Text>
           </Popover>
         </Stack>
-      </section>
+      </Example>
 
-      <section>
-        <Heading level={2}>Drawer</Heading>
+      <Example title="Drawer" description="Side panels in four placements.">
         <Button onClick={() => setDrawerOpen(true)}>Open drawer</Button>
         <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)} title="Settings">
           <Text size="sm">Drawer content lives in a side panel.</Text>
         </Drawer>
-      </section>
+      </Example>
 
-      <section>
-        <Heading level={2}>Dropdown menu</Heading>
+      <Example title="Dropdown menu" description="Keyboard-navigable action menus.">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">Actions</Button>
@@ -55,7 +55,7 @@ export default function OverlaysDemo() {
             <DropdownMenuItem>Archive</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </section>
+      </Example>
     </Stack>
   );
 }

@@ -1,5 +1,6 @@
 import { Building2, Edit, Eye } from "lucide-react";
 import { Button, Table, type TableColumn } from "..";
+import { Example } from "./Example";
 
 type Tenant = {
   id: number;
@@ -144,14 +145,10 @@ const columns: TableColumn<Tenant>[] = [
 
 export default function TableDemo() {
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="mb-2 text-3xl font-bold">Table</h1>
-        <p className="text-muted-foreground">
-          Generic client-side sorting, search, filters, selection, pagination, loading overlay,
-          and empty state. Mobile uses a stacked layout.
-        </p>
-      </header>
+    <Example
+      title="Tenants"
+      description="Sort columns, search, filter, select rows, and paginate."
+    >
       <Table
         columns={columns}
         data={tenants}
@@ -163,6 +160,6 @@ export default function TableDemo() {
           console.log(record.name);
         }}
       />
-    </div>
+    </Example>
   );
 }

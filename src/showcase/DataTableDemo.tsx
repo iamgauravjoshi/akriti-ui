@@ -1,11 +1,10 @@
 import { useState } from "react";
 import {
   DataTable,
-  Heading,
-  Stack,
   Tag,
   type DataTableColumn,
 } from "..";
+import { Example } from "./Example";
 
 type Member = { id: number; name: string; role: string; active: boolean };
 
@@ -34,8 +33,10 @@ const columns: DataTableColumn<Member>[] = [
 export default function DataTableDemo() {
   const [selectedIds, setSelectedIds] = useState<(string | number)[]>([]);
   return (
-    <Stack gap={4}>
-      <Heading level={2}>Data table</Heading>
+    <Example
+      title="Members"
+      description="Sort the Name column, search, or select rows."
+    >
       <DataTable
         data={rows}
         columns={columns}
@@ -45,6 +46,6 @@ export default function DataTableDemo() {
         onSelectionChange={(_, ids) => setSelectedIds(ids)}
         pageSize={10}
       />
-    </Stack>
+    </Example>
   );
 }

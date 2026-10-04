@@ -1,16 +1,14 @@
 import { Button, useToast } from "..";
+import { Example } from "./Example";
 
 export default function ToastDemo() {
   const toast = useToast();
 
   return (
-    <div className="space-y-6">
-      <header>
-        <h1 className="mb-2 text-3xl font-bold">Toast</h1>
-        <p className="text-muted-foreground">
-          ToastProvider owns notifications only. Modals are no longer launched from useToast.
-        </p>
-      </header>
+    <Example
+      title="Trigger toasts"
+      description="Success, error, warning, info, and clear-all."
+    >
       <div className="flex flex-wrap gap-3">
         <Button intent="success" onClick={() => toast.success("Saved", { description: "Profile updated." })}>
           Success
@@ -28,6 +26,6 @@ export default function ToastDemo() {
           Clear all
         </Button>
       </div>
-    </div>
+    </Example>
   );
 }
