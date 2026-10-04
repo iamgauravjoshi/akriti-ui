@@ -161,7 +161,7 @@ function Brand() {
           Akriti UI
         </span>
         <span className="mt-1 block text-xs leading-none text-muted-foreground">
-          v1.0.0 · pre-release
+          v0.1.0 · pre-release
         </span>
       </span>
     </div>
