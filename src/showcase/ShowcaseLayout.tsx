@@ -108,7 +108,7 @@ export function ShowcaseLayout() {
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader onMenu={() => setMenuOpen(true)} />
 
-      <div className="mx-auto flex max-w-7xl items-start">
+      <div className="flex items-start">
         <motion.aside
           initial={false}
           animate={{ width: collapsed ? COLLAPSED_WIDTH : EXPANDED_WIDTH }}
@@ -139,7 +139,7 @@ export function ShowcaseLayout() {
         </motion.aside>
 
         <div className="min-w-0 flex-1">
-          <main className="mx-auto max-w-4xl px-4 py-10 sm:px-8">
+          <main className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-8">
             {meta ? (
               <motion.div
                 key={`header-${meta.to}`}

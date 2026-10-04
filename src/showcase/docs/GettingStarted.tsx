@@ -4,7 +4,7 @@ import { Example } from "../Example";
 
 export default function GettingStarted() {
   return (
-    <Stack gap={8}>
+    <Stack gap={8} className="max-w-3xl">
       <section>
         <h2 className="font-display text-xl font-semibold">1. Install the package</h2>
         <Text tone="muted" className="mt-1">

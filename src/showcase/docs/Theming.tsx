@@ -14,7 +14,7 @@ export default function Theming() {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const [primary, setPrimary] = useState("#635bff");
   return (
-    <Stack gap={8}>
+    <Stack gap={8} className="max-w-3xl">
       <section>
         <h2 className="font-display text-xl font-semibold">1. Semantic tokens</h2>
         <Text tone="muted" className="mt-1">

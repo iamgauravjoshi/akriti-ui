@@ -51,7 +51,7 @@ export function SiteHeader({ onMenu }: { onMenu: () => void }) {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-border bg-background/85 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl items-center gap-2 px-4 py-3">
+        <div className="flex items-center gap-2 px-4 py-3">
           {(onComponentsPage || onDocsPage) && (
             <span className="lg:hidden">
               <IconButton

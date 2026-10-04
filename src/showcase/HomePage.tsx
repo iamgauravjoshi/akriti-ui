@@ -1,6 +1,6 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import {
   ArrowRight,
   Bell,
@@ -117,6 +117,153 @@ const staggerParent = {
   hidden: {},
   show: { transition: { staggerChildren: 0.06 } },
 };
+
+const marqueeItems = [
+  "Buttons",
+  "Inputs",
+  "Tables",
+  "Modals",
+  "Toasts",
+  "Tabs",
+  "Cards",
+  "Badges",
+  "Avatars",
+  "Sliders",
+  "Drawers",
+  "Tooltips",
+  "Forms",
+  "Switches",
+];
+
+const INSTALL_CMD = "npm install akriti-ui";
+
+function TypeInstall() {
+  const reduceMotion = useReducedMotion();
+  const [copied, setCopied] = useState(false);
+  const [length, setLength] = useState(reduceMotion ? INSTALL_CMD.length : 0);
+
+  useEffect(() => {
+    if (reduceMotion) {
+      setLength(INSTALL_CMD.length);
+      return;
+    }
+    setLength(0);
+    const timer = window.setInterval(() => {
+      setLength((prev) => {
+        if (prev >= INSTALL_CMD.length) {
+          window.clearInterval(timer);
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 45);
+    return () => window.clearInterval(timer);
+  }, [reduceMotion]);
+
+  const copyInstall = async () => {
+    try {
+      await navigator.clipboard.writeText(INSTALL_CMD);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
+  };
+
+  return (
+    <div className="flex items-center gap-2 self-start rounded-lg border border-border bg-surface px-4 py-2.5 shadow-sm">
+      <span className="text-primary" aria-hidden>
+        $
+      </span>
+      <Code aria-label="Install command">{INSTALL_CMD.slice(0, length)}</Code>
+      <span aria-hidden className="inline-block h-4 w-[7px] animate-pulse bg-primary" />
+      <button
+        type="button"
+        onClick={copyInstall}
+        aria-label={copied ? "Copied" : "Copy install command"}
+        className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+      >
+        {copied ? <Check size={14} /> : <Copy size={14} />}
+      </button>
+    </div>
+  );
+}
+
+function HeroVisual() {
+  const reduceMotion = useReducedMotion();
+  const mouseX = useMotionValue(0.5);
+  const mouseY = useMotionValue(0.5);
+  const cardX = useSpring(useTransform(mouseX, [0, 1], [14, -14]), {
+    stiffness: 60,
+    damping: 20,
+  });
+  const cardY = useSpring(useTransform(mouseY, [0, 1], [12, -12]), {
+    stiffness: 60,
+    damping: 20,
+  });
+  const chipX = useSpring(useTransform(mouseX, [0, 1], [-20, 20]), {
+    stiffness: 60,
+    damping: 20,
+  });
+  const chipY = useSpring(useTransform(mouseY, [0, 1], [-16, 16]), {
+    stiffness: 60,
+    damping: 20,
+  });
+
+  return (
+    <div
+      className="relative mx-auto w-full max-w-md"
+      onMouseMove={(event) => {
+        if (reduceMotion) return;
+        const rect = event.currentTarget.getBoundingClientRect();
+        mouseX.set((event.clientX - rect.left) / rect.width);
+        mouseY.set((event.clientY - rect.top) / rect.height);
+      }}
+      onMouseLeave={() => {
+        mouseX.set(0.5);
+        mouseY.set(0.5);
+      }}
+    >
+      <motion.div style={reduceMotion ? undefined : { x: cardX, y: cardY }}>
+        <HeroPreview />
+      </motion.div>
+      <motion.div
+        aria-hidden
+        style={reduceMotion ? undefined : { x: chipX, y: chipY }}
+        animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-5 -right-3 hidden items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2 shadow-lg sm:flex"
+      >
+        <span className="flex h-7 w-7 items-center justify-center rounded-full bg-success-subtle text-success">
+          <Check size={14} />
+        </span>
+        <span>
+          <span className="block text-xs font-semibold">Deployed</span>
+          <span className="block text-xs text-muted-foreground">Build #482 live</span>
+        </span>
+      </motion.div>
+      <motion.div
+        aria-hidden
+        style={reduceMotion ? undefined : { x: chipY, y: chipX }}
+        animate={reduceMotion ? undefined : { y: [0, 10, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        className="absolute -bottom-6 -left-3 hidden items-center gap-2 rounded-xl border border-border bg-surface px-3 py-2 shadow-lg sm:flex"
+      >
+        <span className="flex -space-x-2">
+          {["AL", "GT", "MH"].map((initials) => (
+            <span
+              key={initials}
+              className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-surface bg-secondary text-[10px] font-semibold text-secondary-foreground"
+            >
+              {initials}
+            </span>
+          ))}
+        </span>
+        <span className="text-xs font-medium">+9 online</span>
+      </motion.div>
+    </div>
+  );
+}
 
 function HeroPreview() {
   const [alertsOn, setAlertsOn] = useState(true);
@@ -430,18 +577,7 @@ function ThemeLab() {
 }
 
 export default function HomePage() {
-  const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
-
-  const copyInstall = async () => {
-    try {
-      await navigator.clipboard.writeText("npm install akriti-ui");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      setCopied(false);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -449,7 +585,28 @@ export default function HomePage() {
       <main className="mx-auto max-w-6xl px-4">
       <Stack gap={12}>
       <section className="relative overflow-hidden">
-        <div className="grid items-center gap-10 py-14 sm:py-20 lg:grid-cols-[1.05fr_0.95fr]">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_35%,black,transparent)] dark:opacity-40"
+          style={{
+            backgroundImage:
+              "linear-gradient(var(--ak-border) 1px, transparent 1px), linear-gradient(90deg, var(--ak-border) 1px, transparent 1px)",
+            backgroundSize: "44px 44px",
+          }}
+        />
+        <motion.div
+          aria-hidden
+          animate={{ x: [0, 30, -16, 0], y: [0, -22, 12, 0] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -top-32 right-[10%] h-80 w-80 rounded-full bg-primary/15 blur-3xl dark:bg-primary/25"
+        />
+        <motion.div
+          aria-hidden
+          animate={{ x: [0, -24, 18, 0], y: [0, 18, -14, 0] }}
+          transition={{ duration: 26, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-20%] left-[5%] h-80 w-80 rounded-full bg-success/15 blur-3xl dark:bg-success/20"
+        />
+        <div className="relative grid items-center gap-12 py-16 sm:py-24 lg:grid-cols-[1.05fr_0.95fr]">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -460,7 +617,7 @@ export default function HomePage() {
                 <Sparkles size={12} aria-hidden />
                 <span className="ml-1">React · TypeScript · Tokens</span>
               </Badge>
-              <h1 className="max-w-xl font-display text-4xl font-bold leading-tight sm:text-5xl">
+              <h1 className="max-w-xl font-display text-4xl font-bold leading-tight sm:text-6xl">
                 Accessible React components,{" "}
                 <span className="text-primary">themed in minutes</span>
               </h1>
@@ -487,17 +644,7 @@ export default function HomePage() {
                   GitHub
                 </a>
               </div>
-              <div className="flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2.5 shadow-sm">
-                <Code>npm install akriti-ui</Code>
-                <button
-                  type="button"
-                  onClick={copyInstall}
-                  aria-label={copied ? "Copied" : "Copy install command"}
-                  className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
-                >
-                  {copied ? <Check size={14} /> : <Copy size={14} />}
-                </button>
-              </div>
+              <TypeInstall />
               <dl className="flex flex-wrap items-start gap-8 pt-2">
                 {stats.map((stat) => (
                   <div key={stat.label} className="text-center">
@@ -513,7 +660,21 @@ export default function HomePage() {
               </dl>
             </Stack>
           </motion.div>
-          <HeroPreview />
+          <HeroVisual />
+        </div>
+      </section>
+
+      <section aria-hidden className="marquee-mask overflow-hidden border-y border-border py-4">
+        <div className="animate-ak-marquee flex w-max items-center gap-10">
+          {[...marqueeItems, ...marqueeItems].map((name, index) => (
+            <span
+              key={`${name}-${index}`}
+              className="flex items-center gap-10 font-display text-sm font-semibold tracking-wide whitespace-nowrap text-muted-foreground"
+            >
+              {name}
+              <span aria-hidden className="h-1 w-1 rounded-full bg-primary/50" />
+            </span>
+          ))}
         </div>
       </section>
 

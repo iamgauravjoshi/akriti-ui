@@ -28,6 +28,33 @@ body {
   letter-spacing: -0.02em;
 }
 
+.marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+@keyframes ak-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ak-marquee {
+  animation: ak-marquee 32s linear infinite;
+}
+
+.animate-ak-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ak-marquee {
+    animation: none;
+  }
+}
+
 ::selection {
   background-color: var(--ak-primary);
   color: var(--ak-primary-foreground);
