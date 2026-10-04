@@ -14,8 +14,21 @@ body {
   font-family: var(--font-sans);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 #root {
   isolation: isolate;
+}
+
+.font-display {
+  font-family:
+    "Space Grotesk", "Inter Variable", Inter, ui-sans-serif, system-ui,
+    sans-serif;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  background-color: var(--ak-primary);
+  color: var(--ak-primary-foreground);
 }

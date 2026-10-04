@@ -129,7 +129,7 @@ const columns: TableColumn<Tenant>[] = [
   {
     key: "actions",
     title: "Actions",
-    render: (_value, _record) => (
+    render: () => (
       <div className="flex gap-2">
         <Button variant="link" size="sm" leftIcon={<Eye size={16} />}>
           View
