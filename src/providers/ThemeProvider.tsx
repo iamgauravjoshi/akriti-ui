@@ -12,6 +12,7 @@ import {
   applyThemeVars,
   clearThemeVars,
   type CustomTheme,
+  type ThemeTokens,
 } from "../themes/createTheme";
 
 const STORAGE_KEY = "akriti-ui-theme";
@@ -44,6 +45,13 @@ export type ThemeProviderProps = {
   children: ReactNode;
   defaultTheme?: ThemeMode;
   storageKey?: string;
+  /**
+   * Preferred token overrides. Takes precedence over `customTheme`.
+   */
+  theme?: ThemeTokens;
+  /**
+   * @deprecated Use `theme` instead. Kept for backwards compatibility.
+   */
   customTheme?: CustomTheme;
 };
 
@@ -51,9 +59,10 @@ export function ThemeProvider({
   children,
   defaultTheme = "system",
   storageKey = STORAGE_KEY,
+  theme,
   customTheme,
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<ThemeMode>(() =>
+  const [mode, setModeState] = useState<ThemeMode>(() =>
     readStoredTheme(storageKey, defaultTheme),
   );
   const [systemTheme, setSystemTheme] = useState<"light" | "dark">(getSystemTheme);
@@ -65,32 +74,34 @@ export function ThemeProvider({
     return () => media.removeEventListener("change", onChange);
   }, []);
 
-  const resolvedTheme = theme === "system" ? systemTheme : theme;
+  const resolvedTheme = mode === "system" ? systemTheme : mode;
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", resolvedTheme);
   }, [resolvedTheme]);
 
+  const overrides = theme ?? customTheme;
+
   useEffect(() => {
-    if (!customTheme) {
+    if (!overrides) {
       clearThemeVars();
       return;
     }
-    applyThemeVars(customTheme);
+    applyThemeVars(overrides);
     return () => clearThemeVars();
-  }, [customTheme]);
+  }, [overrides]);
 
   const setTheme = useCallback(
     (next: ThemeMode) => {
-      setThemeState(next);
+      setModeState(next);
       window.localStorage.setItem(storageKey, next);
     },
     [storageKey],
   );
 
   const value = useMemo(
-    () => ({ theme, resolvedTheme, setTheme }),
-    [theme, resolvedTheme, setTheme],
+    () => ({ theme: mode, resolvedTheme, setTheme }),
+    [mode, resolvedTheme, setTheme],
   );
 
   return (

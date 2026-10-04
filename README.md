@@ -1,69 +1,71 @@
-# React + TypeScript + Vite
+# Akriti UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Themed, accessible React components with semantic design tokens,
+light/dark/system themes, and strict TypeScript APIs.
 
-Currently, two official plugins are available:
+> Status: pre-release. The package layout is npm-ready (`exports`, types,
+> single CSS file) but the first registry publish is still ahead —
+> see `docs/ROADMAP.md` (M8). Until then, install from git.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Installation
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install akriti-ui
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+```tsx
+import { Button, ThemeProvider } from "akriti-ui";
+import "akriti-ui/style.css";
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+<ThemeProvider>
+  <Button intent="success">Save</Button>
+</ThemeProvider>;
 ```
+
+No Tailwind setup is required in the consumer: `style.css` ships the
+compiled utilities plus the `--ak-*` theme tokens.
+
+## Components
+
+Buttons (`Button`, `IconButton`, `CloseButton`), form inputs (`Input`,
+`Textarea`, `PasswordInput`, `Checkbox`, `RadioGroup`, `Select` /
+`MultiSelect`, `Switch`), forms (`Form` + React Hook Form wrappers,
+`FieldForm`), overlays (`Dialog`, `Modal`), data display (`Table`),
+feedback (`Spinner`, `Toast`/`Toaster`).
+
+## Theming
+
+```tsx
+import { createTheme, ThemeProvider } from "akriti-ui";
+
+const theme = createTheme({
+  colors: { primary: "#635bff" },
+  radius: { radiusMd: "8px" },
+});
+
+<ThemeProvider theme={theme} defaultTheme="system">
+  <App />
+</ThemeProvider>;
+```
+
+`theme` accepts flat token keys (`primary`, `radiusMd`, …) or nested
+sections (`colors`, `radius`, `shadow`, `zIndex`, `duration`); flat keys
+win. Tokens resolve to `--ak-*` CSS variables; `data-theme` switches
+light/dark. `useTheme()` exposes `{ theme, resolvedTheme, setTheme }`.
+
+## Development
+
+```bash
+npm run dev     # showcase app
+npm run test    # vitest (single run)
+npm run lint    # eslint
+npm run build   # typecheck + showcase build
+npm run build:lib  # publishable dist/
+```
+
+Conventions: `docs/CONVENTIONS.md`. Roadmap: `docs/ROADMAP.md`.
+Public API only via `src/index.ts`.
+
+## License
+
+To be decided before first publish (M8).

@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.app.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.lib.tsbuildinfo",
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src/index.ts", "src/vite-env.d.ts"],
+  "exclude": [
+    "src/components/common",
+    "src/components/ButtonsDemo.tsx",
+    "src/components/ModalDemo.tsx",
+    "src/components/TableDemo.tsx",
+    "src/components/FormDemo01.tsx",
+    "src/components/FormDemo02.tsx",
+    "src/components/static"
+  ]
+}
