@@ -4,6 +4,9 @@
   "type": "module",
   "description": "Akriti UI — themed, accessible React components",
   "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
   "main": "./dist/akriti-ui.cjs",
   "module": "./dist/akriti-ui.mjs",
   "types": "./dist/index.d.ts",
