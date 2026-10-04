@@ -8,12 +8,15 @@ import {
   Text,
   VisuallyHidden,
 } from "..";
+import { Example } from "./Example";
 
 export default function PrimitivesDemo() {
   return (
-    <Stack gap={8}>
-      <section>
-        <Heading level={2}>Typography</Heading>
+    <Stack gap={6}>
+      <Example
+        title="Typography"
+        description="Text tones and sizes, headings, code, and keyboard hints."
+      >
         <Stack gap={2}>
           <Heading>Default heading (level 1)</Heading>
           <Text>
@@ -26,13 +29,13 @@ export default function PrimitivesDemo() {
           <Text tone="danger">Danger tone for errors.</Text>
           <VisuallyHidden>Announced to screen readers only.</VisuallyHidden>
         </Stack>
-      </section>
+      </Example>
 
-      <Divider />
-
-      <section>
-        <Heading level={2}>Layout</Heading>
-        <Stack gap={2}>
+      <Example
+        title="Layout"
+        description="Stack and Flex spacing with a Divider between sections."
+      >
+        <Stack gap={3}>
           <Text tone="muted" size="sm">
             Stack (column) of cards:
           </Text>
@@ -44,6 +47,7 @@ export default function PrimitivesDemo() {
               <Text size="sm">Second</Text>
             </div>
           </Stack>
+          <Divider />
           <Text tone="muted" size="sm">
             Flex (row) with wrapping:
           </Text>
@@ -59,7 +63,7 @@ export default function PrimitivesDemo() {
             </div>
           </Flex>
         </Stack>
-      </section>
+      </Example>
     </Stack>
   );
 }

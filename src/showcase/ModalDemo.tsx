@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button, Input, Modal, Textarea } from "..";
+import { Example } from "./Example";
 
 export default function ModalDemo() {
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -7,16 +8,12 @@ export default function ModalDemo() {
   const close = () => setActiveModal(null);
 
   return (
-    <div className="space-y-8">
-      <header>
-        <h1 className="mb-2 text-3xl font-bold">Modal / Dialog</h1>
-        <p className="text-muted-foreground">
-          Built on Radix Dialog: focus trap, portal, Escape, and overlay click. Modal is a
-          styled wrapper with semantic types and confirm actions.
-        </p>
-      </header>
-
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="space-y-6">
+      <Example
+        title="Types and sizes"
+        description="Open each type; Escape, overlay click, and confirm flows included."
+      >
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Button variant="secondary" onClick={() => setActiveModal("basic")}>
           Basic
         </Button>
@@ -39,7 +36,8 @@ export default function ModalDemo() {
         <Button variant="outline" onClick={() => setActiveModal("locked")}>
           Restricted close
         </Button>
-      </div>
+        </div>
+      </Example>
 
       <Modal isOpen={activeModal === "basic"} onClose={close} title="Basic Modal">
         <p className="text-muted-foreground">

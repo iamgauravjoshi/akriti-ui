@@ -9,20 +9,22 @@ import {
   CardHeader,
   CardTitle,
   Empty,
-  Heading,
   Progress,
   Skeleton,
   Stack,
   Tag,
   Text,
 } from "..";
+import { Example } from "./Example";
 
 export default function DisplayDemo() {
   return (
-    <Stack gap={8}>
-      <section>
-        <Heading level={2}>Card</Heading>
-        <Card className="max-w-md">
+    <Stack gap={6}>
+      <Example
+        title="Card"
+        description="Compound sections for headers, content, and footers."
+      >
+        <Card className="max-w-md border-0 shadow-none">
           <CardHeader>
             <CardTitle>Project Alpha</CardTitle>
             <CardDescription>Q4 deliverables and milestones.</CardDescription>
@@ -37,10 +39,12 @@ export default function DisplayDemo() {
             <Tag tone="success">On track</Tag>
           </CardFooter>
         </Card>
-      </section>
+      </Example>
 
-      <section>
-        <Heading level={2}>Badge, Tag, Avatar</Heading>
+      <Example
+        title="Badge, Tag, Avatar"
+        description="Status markers, removable pills, and identity fallbacks."
+      >
         <Stack direction="row" gap={4} align="center">
           <Badge count={5}>
             <Avatar name="Ada Lovelace" />
@@ -53,10 +57,9 @@ export default function DisplayDemo() {
             Blocking
           </Tag>
         </Stack>
-      </section>
+      </Example>
 
-      <section>
-        <Heading level={2}>Alert</Heading>
+      <Example title="Alert" description="Semantic callouts with actions.">
         <Stack gap={2}>
           <Alert tone="info" title="Heads up">
             Deployments resume at 09:00 UTC.
@@ -68,19 +71,23 @@ export default function DisplayDemo() {
             The nightly backup did not complete.
           </Alert>
         </Stack>
-      </section>
+      </Example>
 
-      <section>
-        <Heading level={2}>Skeleton, Empty</Heading>
-        <Stack gap={2}>
-          <Skeleton className="h-4 w-48" />
-          <Skeleton className="h-4 w-32" />
+      <Example
+        title="Skeleton, Empty"
+        description="Loading placeholders and empty states."
+      >
+        <Stack gap={3}>
+          <Stack gap={2}>
+            <Skeleton className="h-4 w-48" />
+            <Skeleton className="h-4 w-32" />
+          </Stack>
+          <Empty
+            title="No projects yet"
+            description="Create your first project to get started."
+          />
         </Stack>
-        <Empty
-          title="No projects yet"
-          description="Create your first project to get started."
-        />
-      </section>
+      </Example>
     </Stack>
   );
 }

@@ -11,6 +11,7 @@ import {
   Upload,
 } from "lucide-react";
 import { Button, CloseButton, IconButton, Switch } from "..";
+import { Example } from "./Example";
 
 export default function ButtonDemo() {
   const [loadingStates, setLoadingStates] = useState<Record<string, boolean>>({});
@@ -24,17 +25,8 @@ export default function ButtonDemo() {
   };
 
   return (
-    <div className="space-y-12">
-      <header>
-        <h1 className="mb-2 text-3xl font-bold">Button</h1>
-        <p className="text-muted-foreground">
-          Variants, semantic intents, sizes, loading, icons, and full-width. Extra visual
-          props such as gradient and animation were dropped in favor of tokens and className.
-        </p>
-      </header>
-
-      <section>
-        <h2 className="mb-4 text-xl font-semibold">Variants</h2>
+    <div className="space-y-6">
+      <Example title="Variants" description="Six visual styles for different emphasis.">
         <div className="flex flex-wrap gap-3">
           <Button variant="primary">Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -43,10 +35,9 @@ export default function ButtonDemo() {
           <Button variant="text">Text</Button>
           <Button variant="link">Link</Button>
         </div>
-      </section>
+      </Example>
 
-      <section>
-        <h2 className="mb-4 text-xl font-semibold">Intents</h2>
+      <Example title="Intents" description="Semantic coloring via intent.">
         <div className="flex flex-wrap gap-3">
           <Button intent="default">Default</Button>
           <Button intent="success">Success</Button>
@@ -54,10 +45,9 @@ export default function ButtonDemo() {
           <Button intent="error">Danger</Button>
           <Button intent="info">Info</Button>
         </div>
-      </section>
+      </Example>
 
-      <section>
-        <h2 className="mb-4 text-xl font-semibold">Sizes</h2>
+      <Example title="Sizes" description="Five sizes from xs to xl.">
         <div className="flex flex-wrap items-end gap-3">
           <Button size="xs">Extra Small</Button>
           <Button size="sm">Small</Button>
@@ -65,10 +55,12 @@ export default function ButtonDemo() {
           <Button size="lg">Large</Button>
           <Button size="xl">Extra Large</Button>
         </div>
-      </section>
+      </Example>
 
-      <section>
-        <h2 className="mb-4 text-xl font-semibold">Icons and loading</h2>
+      <Example
+        title="Icons and loading"
+        description="Leading/trailing icons, async loading, and disabled states."
+      >
         <div className="flex flex-wrap gap-3">
           <Button leftIcon={<Download size={16} />}>Download</Button>
           <Button rightIcon={<ArrowRight size={16} />}>Continue</Button>
@@ -101,10 +93,9 @@ export default function ButtonDemo() {
           <Button disabled>Disabled</Button>
           <Button fullWidth>Full width</Button>
         </div>
-      </section>
+      </Example>
 
-      <section>
-        <h2 className="mb-4 text-xl font-semibold">Icon and close buttons</h2>
+      <Example title="Icon and close buttons" description="Square icon actions.">
         <div className="flex flex-wrap items-center gap-3">
           <IconButton aria-label="Settings" variant="outline">
             <Search size={16} />
@@ -112,17 +103,16 @@ export default function ButtonDemo() {
           <CloseButton onClose={() => undefined} />
           <CloseButton intent="error" onClose={() => undefined} />
         </div>
-      </section>
+      </Example>
 
-      <section>
-        <h2 className="mb-4 text-xl font-semibold">Switch</h2>
+      <Example title="Switch" description="Toggles with intents and loading.">
         <div className="flex flex-wrap gap-6">
           <Switch label="Notifications" checked={enabled} onCheckedChange={setEnabled} />
           <Switch label="Success" intent="success" defaultChecked />
           <Switch label="Disabled" disabled defaultChecked />
           <Switch label="Loading" loading checked />
         </div>
-      </section>
+      </Example>
     </div>
   );
 }

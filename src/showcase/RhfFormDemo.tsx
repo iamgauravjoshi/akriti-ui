@@ -41,10 +41,6 @@ export default function RhfFormDemo() {
 
   return (
     <div className="mx-auto max-w-xl rounded-xl border border-border bg-surface p-6 shadow-sm">
-      <h1 className="mb-2 text-2xl font-semibold">React Hook Form + Zod</h1>
-      <p className="mb-6 text-sm text-muted-foreground">
-        Compound FormField API. Prefer this over schema FieldForm for application screens.
-      </p>
       <Form
         form={form}
         onSubmit={(values) => {
