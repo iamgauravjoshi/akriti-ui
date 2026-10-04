@@ -75,4 +75,4 @@ Public API only via `src/index.ts`.
 
 ## License
 
-To be decided before first publish (M8).
+MIT — see [LICENSE](./LICENSE).

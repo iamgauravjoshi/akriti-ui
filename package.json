@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "description": "Akriti UI — themed, accessible React components",
+  "license": "MIT",
   "main": "./dist/akriti-ui.cjs",
   "module": "./dist/akriti-ui.mjs",
   "types": "./dist/index.d.ts",
@@ -16,7 +17,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist",
+    "LICENSE"
   ],
   "sideEffects": [
     "*.css"
