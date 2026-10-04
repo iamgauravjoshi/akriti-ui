@@ -21,7 +21,7 @@ export default function NavigationDemo() {
         <Breadcrumb
           items={[
             { label: "Home", href: "/" },
-            { label: "Library", href: "/primitives" },
+            { label: "Library", href: "/components/primitives" },
             { label: "Navigation" },
           ]}
         />

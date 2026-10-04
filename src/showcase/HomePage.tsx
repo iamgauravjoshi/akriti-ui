@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { animate, motion, useInView } from "framer-motion";
 import {
   ArrowRight,
   Bell,
@@ -36,6 +36,7 @@ import {
   Stack,
   Text,
 } from "..";
+import { SiteHeader } from "./SiteHeader";
 
 const features = [
   {
@@ -61,25 +62,46 @@ const features = [
 ];
 
 const catalog = [
-  { to: "/buttons", title: "Buttons", body: "Variants, intents, sizes, loading states.", icon: MousePointerClick },
-  { to: "/primitives", title: "Primitives", body: "Typography, Stack, Flex, Divider.", icon: Type },
-  { to: "/display", title: "Display", body: "Card, Badge, Tag, Avatar, Alert, Progress.", icon: LayoutGrid },
-  { to: "/form-demo", title: "Field Form", body: "Schema-driven forms with validation.", icon: ClipboardList },
-  { to: "/form-demo-02", title: "RHF Form", body: "React Hook Form integration.", icon: FileCheck },
-  { to: "/entry", title: "Inputs", body: "Slider, Combobox, DatePicker, OTP, Upload.", icon: SlidersHorizontal },
-  { to: "/table", title: "Table", body: "Sortable, filterable data table.", icon: TableIcon },
-  { to: "/datatable", title: "Data Table", body: "Typed columns, search, selection.", icon: Database },
-  { to: "/navigation", title: "Navigation", body: "Tabs, Accordion, Breadcrumb, Pagination.", icon: Navigation },
-  { to: "/overlays", title: "Overlays", body: "Tooltip, Popover, Drawer, menus.", icon: Layers },
-  { to: "/modals", title: "Modals", body: "Dialogs and confirmation flows.", icon: Square },
-  { to: "/toast", title: "Toast", body: "Notifications with progress and pause.", icon: Bell },
+  { to: "/components/buttons", title: "Buttons", body: "Variants, intents, sizes, loading states.", icon: MousePointerClick },
+  { to: "/components/primitives", title: "Primitives", body: "Typography, Stack, Flex, Divider.", icon: Type },
+  { to: "/components/display", title: "Display", body: "Card, Badge, Tag, Avatar, Alert, Progress.", icon: LayoutGrid },
+  { to: "/components/field-form", title: "Field Form", body: "Schema-driven forms with validation.", icon: ClipboardList },
+  { to: "/components/rhf-form", title: "RHF Form", body: "React Hook Form integration.", icon: FileCheck },
+  { to: "/components/inputs", title: "Inputs", body: "Slider, Combobox, DatePicker, OTP, Upload.", icon: SlidersHorizontal },
+  { to: "/components/table", title: "Table", body: "Sortable, filterable data table.", icon: TableIcon },
+  { to: "/components/datatable", title: "Data Table", body: "Typed columns, search, selection.", icon: Database },
+  { to: "/components/navigation", title: "Navigation", body: "Tabs, Accordion, Breadcrumb, Pagination.", icon: Navigation },
+  { to: "/components/overlays", title: "Overlays", body: "Tooltip, Popover, Drawer, menus.", icon: Layers },
+  { to: "/components/modals", title: "Modals", body: "Dialogs and confirmation flows.", icon: Square },
+  { to: "/components/toast", title: "Toast", body: "Notifications with progress and pause.", icon: Bell },
 ];
 
 const stats = [
-  { value: "60+", label: "Components" },
-  { value: "27", label: "Semantic tokens" },
-  { value: "3", label: "Theme modes" },
+  { value: 60, suffix: "+", label: "Components" },
+  { value: 27, suffix: "", label: "Semantic tokens" },
+  { value: 3, suffix: "", label: "Theme modes" },
 ];
+
+function CountUp({ value, suffix }: { value: number; suffix: string }) {
+  const ref = useRef<HTMLParagraphElement>(null);
+  const inView = useInView(ref, { once: true });
+  const [display, setDisplay] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    const controls = animate(0, value, {
+      duration: 1.2,
+      ease: "easeOut",
+      onUpdate: (latest) => setDisplay(Math.round(latest)),
+    });
+    return () => controls.stop();
+  }, [inView, value]);
+  return (
+    <p ref={ref} className="font-display text-2xl font-bold sm:text-3xl">
+      {display}
+      {suffix}
+    </p>
+  );
+}
 
 const rise = {
   hidden: { opacity: 0, y: 16 },
@@ -106,6 +128,9 @@ export default function HomePage() {
   };
 
   return (
+    <div className="min-h-screen bg-background text-foreground">
+      <SiteHeader onMenu={() => undefined} />
+      <main className="mx-auto max-w-6xl px-4">
     <Stack gap={12}>
       <motion.section
         initial={{ opacity: 0, y: 20 }}
@@ -117,12 +142,16 @@ export default function HomePage() {
           aria-hidden
           className="absolute inset-0 bg-gradient-to-br from-primary/15 via-info/10 to-success/15 dark:from-primary/25 dark:via-info/15 dark:to-success/20"
         />
-        <div
+        <motion.div
           aria-hidden
+          animate={{ x: [0, 24, -12, 0], y: [0, -18, 10, 0] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
           className="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-primary/20 blur-3xl dark:bg-primary/30"
         />
-        <div
+        <motion.div
           aria-hidden
+          animate={{ x: [0, -20, 14, 0], y: [0, 14, -12, 0] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
           className="absolute -bottom-28 -left-20 h-72 w-72 rounded-full bg-info/20 blur-3xl dark:bg-info/25"
         />
         <div className="relative px-6 py-14 text-center sm:px-12 sm:py-20">
@@ -155,11 +184,11 @@ export default function HomePage() {
               </div>
             </div>
             <Stack direction="row" gap={3} justify="center">
-              <Button variant="primary" onClick={() => navigate("/primitives")}>
+              <Button variant="primary" onClick={() => navigate("/components/primitives")}>
                 Explore components
                 <ArrowRight size={16} aria-hidden />
               </Button>
-              <Button variant="outline" onClick={() => navigate("/form-demo")}>
+              <Button variant="outline" onClick={() => navigate("/components/field-form")}>
                 <Calendar size={16} aria-hidden />
                 Live demos
               </Button>
@@ -167,9 +196,7 @@ export default function HomePage() {
             <div className="flex flex-wrap items-center justify-center gap-8 pt-2">
               {stats.map((stat) => (
                 <div key={stat.label} className="text-center">
-                  <p className="font-display text-2xl font-bold sm:text-3xl">
-                    {stat.value}
-                  </p>
+                  <CountUp value={stat.value} suffix={stat.suffix} />
                   <p className="text-xs tracking-wider text-muted-foreground uppercase">
                     {stat.label}
                   </p>
@@ -274,7 +301,7 @@ export default function HomePage() {
               to light and dark automatically.
             </Text>
             <div>
-              <Button variant="primary" onClick={() => navigate("/entry")}>
+              <Button variant="primary" onClick={() => navigate("/components/inputs")}>
                 See components in action
                 <ArrowRight size={16} aria-hidden />
               </Button>
@@ -309,6 +336,12 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
-    </Stack>
+      </Stack>
+      </main>
+      <footer className="border-t border-border px-4 py-6 text-center text-xs text-muted-foreground">
+        Akriti UI component showcase — import from{" "}
+        <code className="rounded bg-muted px-1 py-0.5">akriti-ui</code>.
+      </footer>
+    </div>
   );
 }
