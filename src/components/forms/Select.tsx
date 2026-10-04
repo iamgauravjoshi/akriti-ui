@@ -238,7 +238,10 @@ export function Select<T extends string | number = string | number>(
 
   useEffect(() => {
     if (highlightedIndex >= 0) {
-      optionsRef.current[highlightedIndex]?.scrollIntoView({ block: "nearest" });
+      const node = optionsRef.current[highlightedIndex];
+      if (node && typeof node.scrollIntoView === "function") {
+        node.scrollIntoView({ block: "nearest" });
+      }
     }
   }, [highlightedIndex]);
 
@@ -273,6 +276,11 @@ export function Select<T extends string | number = string | number>(
           role="combobox"
           aria-expanded={isOpen}
           aria-controls={listboxId}
+          aria-activedescendant={
+            isOpen && highlightedIndex >= 0
+              ? `${listboxId}-option-${highlightedIndex}`
+              : undefined
+          }
           aria-haspopup="listbox"
           aria-invalid={invalid || undefined}
           aria-required={required || undefined}
@@ -391,6 +399,7 @@ export function Select<T extends string | number = string | number>(
                     return (
                       <div
                         key={String(option.value)}
+                        id={`${listboxId}-option-${index}`}
                         ref={(node) => {
                           optionsRef.current[index] = node;
                         }}

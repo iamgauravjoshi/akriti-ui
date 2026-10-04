@@ -54,7 +54,8 @@ export const Pagination = forwardRef<HTMLElement, PaginationProps>(
     ref,
   ) => {
     const [uncontrolledPage, setUncontrolledPage] = useState(defaultPage);
-    const page = controlledPage ?? uncontrolledPage;
+    const rawPage = controlledPage ?? uncontrolledPage;
+    const page = Math.min(Math.max(1, rawPage), Math.max(1, pageCount));
 
     const goTo = (next: number) => {
       const clamped = Math.min(pageCount, Math.max(1, next));

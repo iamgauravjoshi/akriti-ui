@@ -17,9 +17,12 @@ export type UploadProps = Omit<
   accept?: string;
   multiple?: boolean;
   maxFiles?: number;
+  maxSize?: number;
   disabled?: boolean;
   label?: ReactNode;
   hint?: ReactNode;
+  id?: string;
+  name?: string;
   onFilesChange?: (files: File[]) => void;
   className?: string;
   style?: CSSProperties;
@@ -31,9 +34,12 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
       accept,
       multiple = false,
       maxFiles,
+      maxSize,
       disabled = false,
       label = "Choose files",
       hint = "or drag and drop here",
+      id,
+      name,
       onFilesChange,
       className,
       style,
@@ -43,18 +49,39 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
   ) => {
     const [files, setFiles] = useState<File[]>([]);
     const [dragging, setDragging] = useState(false);
+    const [rejected, setRejected] = useState<string | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
+    const filesRef = useRef<File[]>([]);
 
     const commit = (next: File[]) => {
       const capped =
         maxFiles !== undefined ? next.slice(0, maxFiles) : next;
+      filesRef.current = capped;
       setFiles(capped);
       onFilesChange?.(capped);
     };
 
     const addFiles = (incoming: File[]) => {
       if (disabled || incoming.length === 0) return;
-      commit(multiple ? [...files, ...incoming] : incoming.slice(0, 1));
+      const oversized =
+        maxSize !== undefined
+          ? incoming.filter((file) => file.size > maxSize)
+          : [];
+      setRejected(
+        oversized.length > 0
+          ? `${oversized.length} file(s) exceed the size limit and were skipped.`
+          : null,
+      );
+      const accepted =
+        maxSize !== undefined
+          ? incoming.filter((file) => file.size <= maxSize)
+          : incoming;
+      if (accepted.length === 0) return;
+      commit(
+        multiple
+          ? [...filesRef.current, ...accepted]
+          : accepted.slice(0, 1),
+      );
     };
 
     const removeFile = (index: number) => {
@@ -76,6 +103,8 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
           accept={accept}
           multiple={multiple}
           disabled={disabled}
+          id={id}
+          name={name}
           aria-label={typeof label === "string" ? label : "Choose files"}
           onChange={(event) => {
             addFiles(Array.from(event.target.files ?? []));
@@ -102,6 +131,11 @@ export const Upload = forwardRef<HTMLDivElement, UploadProps>(
           <span className="font-medium text-foreground">{label}</span>
           {hint ? <span className="text-xs text-muted-foreground">{hint}</span> : null}
         </button>
+        {rejected ? (
+          <p className="text-sm text-danger" role="alert">
+            {rejected}
+          </p>
+        ) : null}
         {files.length > 0 ? (
           <ul className="space-y-1.5">
             {files.map((file, index) => (

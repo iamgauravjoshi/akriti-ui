@@ -106,6 +106,7 @@ export function FieldForm({
   const [errors, setErrors] = useState<Record<string, string | null>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const setValue = useCallback((name: string, value: FormDataValue) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -141,8 +142,13 @@ export function FieldForm({
     setTouched(Object.fromEntries(fields.map((field) => [field.name, true])));
     if (!valid) return;
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       await onSubmit(formData);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "Something went wrong. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -153,6 +159,7 @@ export function FieldForm({
       {title ? (
         <h2 className="mb-6 text-2xl font-semibold text-foreground">{title}</h2>
       ) : null}
+      {submitError ? <FormError>{submitError}</FormError> : null}
       <div className="space-y-5">
         {fields.map((field) => {
           const error = errors[field.name];
@@ -280,6 +287,7 @@ export function FieldForm({
               setFormData(defaultFormData);
               setErrors({});
               setTouched({});
+              setSubmitError(null);
             }}
           >
             {resetText}
