@@ -237,8 +237,9 @@ export function Select<T extends string | number = string | number>(
   }, [loadOptions, handleAsyncLoad]);
 
   useEffect(() => {
-    highlightedIndex >= 0 &&
+    if (highlightedIndex >= 0) {
       optionsRef.current[highlightedIndex]?.scrollIntoView({ block: "nearest" });
+    }
   }, [highlightedIndex]);
 
   const hasValue = multiple

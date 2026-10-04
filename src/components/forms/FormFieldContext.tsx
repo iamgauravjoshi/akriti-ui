@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components -- context value + hook intentionally co-located in library code */
 import { createContext, useContext } from "react";
 
 export type FormFieldContextValue = {
