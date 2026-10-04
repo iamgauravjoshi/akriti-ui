@@ -25,8 +25,12 @@ Non-goals: new components, React 18 support widening, docs site, CI.
 ### 3.1 Build outputs (Vite library mode)
 
 - Entry: `src/index.ts`. Formats: `es` + `cjs`.
-- Declarations via `vite-plugin-dts` (new devDependency).
-- `dist/`: `akriti-ui.mjs`, `akriti-ui.cjs`, `index.d.ts`, `style.css`.
+- Declarations via `tsc -p tsconfig.lib.json` (`emitDeclarationOnly`,
+  rooted at `src/index.ts`, so only the reachable library graph gets
+  `.d.ts`). No declaration bundler dependency.
+- `dist/`: `akriti-ui.mjs`, `akriti-ui.cjs` (+ maps), `style.css`,
+  `index.d.ts` + co-located component declarations. `publicDir: false`
+  so no app assets leak into the package.
 - Scripts: `build:lib` (library); existing `build` unchanged (showcase).
 
 ### 3.2 Manifest (`package.json`)
@@ -41,9 +45,11 @@ Non-goals: new components, React 18 support widening, docs site, CI.
 
 ### 3.3 CSS strategy
 
-- New entry `src/akriti.css`: `@import "tailwindcss";` +
-  `@import "./styles/tokens.css";` — utilities are tree-shaken to what
-  the library uses; `--ak-*` tokens ride along via `@theme inline`.
+- New entry `src/akriti.css`: `@import "tailwindcss" source(none);` +
+  explicit `@source "./components";` / `@source "./providers";` +
+  `@import "./styles/tokens.css";` — utilities are scoped to library code
+  only (verified: showcase-only classes like `max-w-6xl` absent from
+  output); `--ak-*` tokens ride along via `@theme inline`.
 - Must NOT reuse `src/index.css` (contains global `body` rules).
 - Preflight ships inside `style.css` (AntD-style baseline), documented
   as included so consumers don't double-apply their own reset blindly.
