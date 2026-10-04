@@ -117,3 +117,40 @@ export const darkTokens: SemanticTokens = {
   disabled: "#64748b",
   overlay: "rgba(2, 6, 23, 0.7)",
 };
+
+export const radiusTokenKeys = ["radiusSm", "radiusMd", "radiusLg", "radiusXl"] as const;
+
+export const shadowTokenKeys = ["shadowSm", "shadowMd", "shadowLg"] as const;
+
+export const zTokenKeys = ["zOverlay", "zToast"] as const;
+
+export const durationTokenKeys = ["durationFast", "durationNormal"] as const;
+
+export type RadiusTokenKey = (typeof radiusTokenKeys)[number];
+export type ShadowTokenKey = (typeof shadowTokenKeys)[number];
+export type ZTokenKey = (typeof zTokenKeys)[number];
+export type DurationTokenKey = (typeof durationTokenKeys)[number];
+
+export type ThemeTokenKey =
+  | SemanticTokenKey
+  | RadiusTokenKey
+  | ShadowTokenKey
+  | ZTokenKey
+  | DurationTokenKey;
+
+export const themeCssVarNames: Record<ThemeTokenKey, string> = {
+  ...cssVarNames,
+  radiusSm: "--ak-radius-sm",
+  radiusMd: "--ak-radius-md",
+  radiusLg: "--ak-radius-lg",
+  radiusXl: "--ak-radius-xl",
+  shadowSm: "--ak-shadow-sm",
+  shadowMd: "--ak-shadow-md",
+  shadowLg: "--ak-shadow-lg",
+  zOverlay: "--ak-z-overlay",
+  zToast: "--ak-z-toast",
+  durationFast: "--ak-duration-fast",
+  durationNormal: "--ak-duration-normal",
+};
+
+export type ThemeTokens = Partial<Record<ThemeTokenKey, string>>;
