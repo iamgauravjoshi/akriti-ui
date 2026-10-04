@@ -24,3 +24,19 @@ breaking public API → major with migration notes).
   pagination, selection.
 - Showcase homepage with install snippet and component catalog (M8).
 - Consumer fixture: `examples/basic-vite`.
+- Review fixes: deleted unreachable legacy code (`components/common`,
+  old demos); `Table` converged on a single responsive table;
+  `FieldForm` surfaces async submit errors; `DatePicker` clear button is
+  a real sibling button; `OtpInput` preserves digit positions;
+  `Select`/`Combobox` expose `aria-activedescendant`;
+  `Text`/`Stack` are generic polymorphic components;
+  `Toast` deduplicates rapid calls correctly.
+- Package hygiene: removed unused deps (`axios`, `lodash`, `classnames`,
+  `framer-motion`); showcase-only deps moved to devDependencies;
+  version reset to `0.1.0` for the pre-release line; CI workflow added.
+
+### Removed
+
+- `Toast` `animation` option (accepted but never rendered).
+- Legacy `src/components/common`, old demo files, `App.css`,
+  unused `react.svg` asset.

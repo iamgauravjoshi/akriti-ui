@@ -1,9 +1,10 @@
 import {
   createElement,
-  forwardRef,
+  type ComponentPropsWithRef,
   type CSSProperties,
-  type HTMLAttributes,
-  type JSX,
+  type ElementType,
+  type ReactNode,
+  type Ref,
 } from "react";
 import { cn } from "../../lib/cn";
 
@@ -17,11 +18,8 @@ export type StackJustify =
   | "around"
   | "evenly";
 
-export type StackProps = Omit<
-  HTMLAttributes<HTMLElement>,
-  "className" | "style"
-> & {
-  as?: keyof JSX.IntrinsicElements;
+export type StackProps<T extends ElementType = "div"> = {
+  as?: T;
   direction?: StackDirection;
   gap?: number;
   align?: StackAlign;
@@ -29,7 +27,21 @@ export type StackProps = Omit<
   wrap?: boolean;
   className?: string;
   style?: CSSProperties;
-};
+  children?: ReactNode;
+  ref?: Ref<Element>;
+} & Omit<
+  ComponentPropsWithRef<T>,
+  | "as"
+  | "direction"
+  | "gap"
+  | "align"
+  | "justify"
+  | "wrap"
+  | "className"
+  | "style"
+  | "children"
+  | "ref"
+>;
 
 const directionClasses: Record<StackDirection, string> = {
   column: "flex-col",
@@ -53,40 +65,34 @@ const justifyClasses: Record<StackJustify, string> = {
   evenly: "justify-evenly",
 };
 
-export const Stack = forwardRef<HTMLElement, StackProps>(
-  (
+export function Stack<T extends ElementType = "div">({
+  as,
+  direction = "column",
+  gap = 4,
+  align,
+  justify,
+  wrap = false,
+  className,
+  style,
+  children,
+  ref,
+  ...props
+}: StackProps<T>) {
+  return createElement(
+    as ?? "div",
     {
-      as = "div",
-      direction = "column",
-      gap = 4,
-      align,
-      justify,
-      wrap = false,
-      className,
-      style,
-      children,
-      ...props
+      ...props,
+      ref,
+      className: cn(
+        "flex",
+        directionClasses[direction],
+        align && alignClasses[align],
+        justify && justifyClasses[justify],
+        wrap && "flex-wrap",
+        className,
+      ),
+      style: { gap: `calc(var(--spacing) * ${gap})`, ...style },
     },
-    ref,
-  ) => {
-    return createElement(
-      as,
-      {
-        ...props,
-        ref,
-        className: cn(
-          "flex",
-          directionClasses[direction],
-          align && alignClasses[align],
-          justify && justifyClasses[justify],
-          wrap && "flex-wrap",
-          className,
-        ),
-        style: { gap: `calc(var(--spacing) * ${gap})`, ...style },
-      },
-      children,
-    );
-  },
-);
-
-Stack.displayName = "Stack";
+    children,
+  );
+}

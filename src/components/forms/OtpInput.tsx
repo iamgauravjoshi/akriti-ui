@@ -52,9 +52,9 @@ export const OtpInput = forwardRef<HTMLDivElement, OtpInputProps>(
     };
 
     const setDigit = (index: number, digit: string) => {
-      const chars = current.split("");
+      const chars = Array.from({ length }, (_, i) => current[i] ?? "");
       chars[index] = digit;
-      commit(chars.join("").slice(0, length));
+      commit(chars.join(""));
     };
 
     const focusBox = (index: number) => {
@@ -67,7 +67,7 @@ export const OtpInput = forwardRef<HTMLDivElement, OtpInputProps>(
       if (current[index]) {
         setDigit(index, "");
       } else if (index > 0) {
-        const chars = current.split("");
+        const chars = Array.from({ length }, (_, i) => current[i] ?? "");
         chars[index - 1] = "";
         commit(chars.join(""));
         focusBox(index - 1);

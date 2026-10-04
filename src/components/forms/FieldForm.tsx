@@ -1,4 +1,11 @@
-import { useCallback, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import {
+  useCallback,
+  useMemo,
+  useState,
+  type CSSProperties,
+  type FormEvent,
+  type ReactNode,
+} from "react";
 import { Button } from "../buttons/Button";
 import { Checkbox } from "./Checkbox";
 import { Input } from "./Input";
@@ -20,6 +27,7 @@ export type FieldType =
   | "email"
   | "password"
   | "tel"
+  | "number"
   | "select"
   | "textarea"
   | "checkbox"
@@ -48,12 +56,19 @@ export type FieldFormField = {
 export type FieldFormProps = {
   fields: FieldFormField[];
   className?: string;
+  style?: CSSProperties;
   submitText?: string;
   resetText?: string;
   title?: string;
   onSubmit: (formData: Record<string, FormDataValue>) => Promise<void> | void;
   defaultFormData?: Record<string, FormDataValue>;
 };
+
+function toNumberValue(raw: string): FormDataValue {
+  if (raw === "") return undefined;
+  const next = Number(raw);
+  return Number.isNaN(next) ? raw : next;
+}
 
 function requiredMessage(value: FormDataValue) {
   if (typeof value === "boolean") return null;
@@ -96,6 +111,7 @@ function validateField(field: FieldFormField, value: FormDataValue) {
 export function FieldForm({
   fields,
   className,
+  style,
   onSubmit,
   submitText = "Submit",
   resetText,
@@ -106,6 +122,7 @@ export function FieldForm({
   const [errors, setErrors] = useState<Record<string, string | null>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const setValue = useCallback((name: string, value: FormDataValue) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -141,18 +158,24 @@ export function FieldForm({
     setTouched(Object.fromEntries(fields.map((field) => [field.name, true])));
     if (!valid) return;
     setIsSubmitting(true);
+    setSubmitError(null);
     try {
       await onSubmit(formData);
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : "Something went wrong. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={className} noValidate>
+    <form onSubmit={handleSubmit} className={className} style={style} noValidate>
       {title ? (
         <h2 className="mb-6 text-2xl font-semibold text-foreground">{title}</h2>
       ) : null}
+      {submitError ? <FormError>{submitError}</FormError> : null}
       <div className="space-y-5">
         {fields.map((field) => {
           const error = errors[field.name];
@@ -254,7 +277,14 @@ export function FieldForm({
                   autoComplete={field.autocomplete}
                   error={showError}
                   leftIcon={field.icon}
-                  onChange={(event) => setValue(field.name, event.target.value)}
+                  onChange={(event) =>
+                    setValue(
+                      field.name,
+                      field.type === "number"
+                        ? toNumberValue(event.target.value)
+                        : event.target.value,
+                    )
+                  }
                   onBlur={() => handleBlur(field)}
                 />
               )}
@@ -280,6 +310,7 @@ export function FieldForm({
               setFormData(defaultFormData);
               setErrors({});
               setTouched({});
+              setSubmitError(null);
             }}
           >
             {resetText}

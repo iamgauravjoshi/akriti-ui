@@ -1,7 +1,6 @@
 import {
   forwardRef,
   useId,
-  useRef,
   useState,
   type CSSProperties,
   type KeyboardEvent,
@@ -68,7 +67,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
     const [highlighted, setHighlighted] = useState(-1);
-    const containerRef = useRef<HTMLDivElement>(null);
 
     const selected = options.find((option) => option.value === current);
     const shown = open ? query : (selected?.label ?? "");
@@ -131,7 +129,6 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
           </label>
         ) : null}
         <div
-          ref={containerRef}
           className="relative"
           onBlur={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget as Node)) {
@@ -147,6 +144,11 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
             role="combobox"
             aria-expanded={open}
             aria-controls={listboxId}
+            aria-activedescendant={
+              open && highlighted >= 0
+                ? `${listboxId}-option-${highlighted}`
+                : undefined
+            }
             aria-autocomplete="list"
             aria-invalid={invalid || undefined}
             data-name={name ?? field?.name}
@@ -191,6 +193,7 @@ export const Combobox = forwardRef<HTMLInputElement, ComboboxProps>(
                   {filtered.map((option, index) => (
                     <div
                       key={option.value}
+                      id={`${listboxId}-option-${index}`}
                       role="option"
                       aria-selected={option.value === current}
                       aria-disabled={option.disabled || undefined}

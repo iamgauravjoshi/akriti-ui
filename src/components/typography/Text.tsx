@@ -1,9 +1,10 @@
 import {
   createElement,
-  forwardRef,
+  type ComponentPropsWithRef,
   type CSSProperties,
-  type HTMLAttributes,
-  type JSX,
+  type ElementType,
+  type ReactNode,
+  type Ref,
 } from "react";
 import { cn } from "../../lib/cn";
 
@@ -17,17 +18,26 @@ export type TextTone =
 
 export type TextSize = "xs" | "sm" | "md" | "lg" | "xl";
 
-export type TextProps = Omit<
-  HTMLAttributes<HTMLElement>,
-  "className" | "style"
-> & {
-  as?: keyof JSX.IntrinsicElements;
+export type TextProps<T extends ElementType = "span"> = {
+  as?: T;
   size?: TextSize;
   tone?: TextTone;
   truncate?: boolean;
   className?: string;
   style?: CSSProperties;
-};
+  children?: ReactNode;
+  ref?: Ref<Element>;
+} & Omit<
+  ComponentPropsWithRef<T>,
+  | "as"
+  | "size"
+  | "tone"
+  | "truncate"
+  | "className"
+  | "style"
+  | "children"
+  | "ref"
+>;
 
 const sizeClasses: Record<TextSize, string> = {
   xs: "text-xs",
@@ -46,36 +56,30 @@ const toneClasses: Record<TextTone, string> = {
   info: "text-info",
 };
 
-export const Text = forwardRef<HTMLElement, TextProps>(
-  (
+export function Text<T extends ElementType = "span">({
+  as,
+  size = "md",
+  tone = "default",
+  truncate = false,
+  className,
+  style,
+  children,
+  ref,
+  ...props
+}: TextProps<T>) {
+  return createElement(
+    as ?? "span",
     {
-      as = "span",
-      size = "md",
-      tone = "default",
-      truncate = false,
-      className,
+      ...props,
+      ref,
+      className: cn(
+        sizeClasses[size],
+        toneClasses[tone],
+        truncate && "truncate",
+        className,
+      ),
       style,
-      children,
-      ...props
     },
-    ref,
-  ) => {
-    return createElement(
-      as,
-      {
-        ...props,
-        ref,
-        className: cn(
-          sizeClasses[size],
-          toneClasses[tone],
-          truncate && "truncate",
-          className,
-        ),
-        style,
-      },
-      children,
-    );
-  },
-);
-
-Text.displayName = "Text";
+    children,
+  );
+}

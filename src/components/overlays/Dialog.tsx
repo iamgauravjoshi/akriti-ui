@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { AlertCircle, AlertTriangle, CheckCircle, Info } from "lucide-react";
 import { cn } from "../../lib/cn";
@@ -40,6 +40,7 @@ export function DialogOverlay({ className }: { className?: string }) {
 export type DialogContentProps = {
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
   size?: Extract<Size, "sm" | "md" | "lg" | "xl">;
 };
 
@@ -53,12 +54,14 @@ const sizeClasses = {
 export function DialogContent({
   children,
   className,
+  style,
   size = "md",
 }: DialogContentProps) {
   return (
     <DialogPrimitive.Portal>
       <DialogOverlay />
       <DialogPrimitive.Content
+        style={style}
         className={cn(
           "fixed top-1/2 left-1/2 z-[var(--ak-z-overlay)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2",
           "rounded-xl border border-border bg-surface p-0 text-foreground shadow-lg",
@@ -83,6 +86,8 @@ export type ModalProps = {
   size?: ModalSize;
   title?: string;
   children?: ReactNode;
+  className?: string;
+  style?: CSSProperties;
   showCloseButton?: boolean;
   closeOnOutsideClick?: boolean;
   closeOnEscape?: boolean;
@@ -131,6 +136,8 @@ export function Modal({
   size = "md",
   title,
   children,
+  className,
+  style,
   showCloseButton = true,
   closeOnOutsideClick = true,
   closeOnEscape = true,
@@ -151,6 +158,7 @@ export function Modal({
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-[var(--ak-z-overlay)] bg-overlay backdrop-blur-sm" />
         <DialogPrimitive.Content
+          style={style}
           onEscapeKeyDown={(event) => {
             if (!closeOnEscape) event.preventDefault();
           }}
@@ -161,6 +169,7 @@ export function Modal({
             "fixed top-1/2 left-1/2 z-[var(--ak-z-overlay)] w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2",
             "overflow-hidden rounded-xl border border-border bg-surface text-foreground shadow-lg focus:outline-none",
             sizeClasses[size],
+            className,
           )}
         >
           {title ? (

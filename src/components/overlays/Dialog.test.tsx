@@ -25,4 +25,13 @@ describe("Modal", () => {
     );
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
+
+  it("forwards style to the dialog content", () => {
+    render(
+      <Modal isOpen onClose={() => undefined} style={{ marginTop: "8px" }}>
+        <p>Styled</p>
+      </Modal>,
+    );
+    expect(screen.getByRole("dialog")).toHaveStyle({ marginTop: "8px" });
+  });
 });

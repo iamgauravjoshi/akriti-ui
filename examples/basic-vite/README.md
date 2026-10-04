@@ -18,7 +18,6 @@ npm run build
 # 4. Or run the dev server and open the page
 npm run dev
 ```
-
 ## What it validates
 
 - `file:../..` installation resolves `exports` (`.` and `./style.css`)

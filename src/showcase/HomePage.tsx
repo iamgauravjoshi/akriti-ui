@@ -111,9 +111,9 @@ export default function HomePage() {
         />
         <div className="relative px-6 py-14 text-center sm:px-12 sm:py-20">
           <Stack gap={5} align="center">
-            <Badge tone="info">
+              <Badge tone="info">
               <Sparkles size={12} aria-hidden />
-              <span className="ml-1">v1.0.0 · pre-release</span>
+              <span className="ml-1">v0.1.0 · pre-release</span>
             </Badge>
             <h1 className="max-w-3xl font-display text-4xl font-bold leading-tight sm:text-6xl">
               Interfaces that feel{" "}

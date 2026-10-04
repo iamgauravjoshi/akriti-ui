@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  useEffect,
   useState,
   type CSSProperties,
   type ReactNode,
@@ -66,6 +67,13 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
     );
     const [viewMonth, setViewMonth] = useState((current ?? today).getMonth());
 
+    useEffect(() => {
+      if (value) {
+        setViewYear(value.getFullYear());
+        setViewMonth(value.getMonth());
+      }
+    }, [value]);
+
     const commit = (next: Date | undefined) => {
       if (value === undefined) setInternal(next);
       onChange?.(next);
@@ -96,48 +104,29 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
             ) : null}
           </span>
         ) : null}
-        <Popover
-          open={open}
-          onOpenChange={setOpen}
-          trigger={
-            <button
-              ref={ref}
-              type="button"
-              disabled={disabled}
-              className={cn(
-                fieldChrome(false),
-                "flex h-10 items-center justify-between gap-2 px-3 text-sm",
-                !current && "text-muted-foreground",
-              )}
-            >
-              <span className="flex items-center gap-2">
-                <CalendarIcon size={16} className="text-muted-foreground" aria-hidden />
-                {current ? formatDate(current) : placeholder}
-              </span>
-              {clearable && current && !disabled ? (
-                <span
-                  role="button"
-                  tabIndex={0}
-                  aria-label="Clear date"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    commit(undefined);
-                  }}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      event.stopPropagation();
-                      commit(undefined);
-                    }
-                  }}
-                  className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
-                >
-                  <X size={14} />
+        <div className="relative">
+          <Popover
+            open={open}
+            onOpenChange={setOpen}
+            trigger={
+              <button
+                ref={ref}
+                type="button"
+                disabled={disabled}
+                className={cn(
+                  fieldChrome(false),
+                  "flex h-10 w-full items-center justify-between gap-2 px-3 text-sm",
+                  !current && "text-muted-foreground",
+                  clearable && current && !disabled && "pr-10",
+                )}
+              >
+                <span className="flex items-center gap-2">
+                  <CalendarIcon size={16} className="text-muted-foreground" aria-hidden />
+                  {current ? formatDate(current) : placeholder}
                 </span>
-              ) : null}
-            </button>
-          }
-        >
+              </button>
+            }
+          >
           <div aria-label="Choose date">
             <div className="mb-2 flex items-center justify-between">
               <button
@@ -193,6 +182,17 @@ export const DatePicker = forwardRef<HTMLButtonElement, DatePickerProps>(
             </div>
           </div>
         </Popover>
+        {clearable && current && !disabled ? (
+          <button
+            type="button"
+            aria-label="Clear date"
+            onClick={() => commit(undefined)}
+            className="absolute top-1/2 right-2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+          >
+            <X size={14} />
+          </button>
+        ) : null}
+        </div>
       </div>
     );
   },

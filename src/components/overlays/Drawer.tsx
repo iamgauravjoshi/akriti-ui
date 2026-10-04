@@ -14,6 +14,8 @@ export type DrawerProps = {
   className?: string;
   style?: CSSProperties;
   showCloseButton?: boolean;
+  closeOnOutsideClick?: boolean;
+  closeOnEscape?: boolean;
 };
 
 const sideClasses: Record<DrawerSide, string> = {
@@ -32,6 +34,8 @@ export function Drawer({
   className,
   style,
   showCloseButton = true,
+  closeOnOutsideClick = true,
+  closeOnEscape = true,
 }: DrawerProps) {
   return (
     <DialogPrimitive.Root
@@ -44,6 +48,12 @@ export function Drawer({
         <DialogPrimitive.Overlay className="fixed inset-0 z-[var(--ak-z-overlay)] bg-overlay backdrop-blur-sm" />
         <DialogPrimitive.Content
           style={style}
+          onEscapeKeyDown={(event) => {
+            if (!closeOnEscape) event.preventDefault();
+          }}
+          onInteractOutside={(event) => {
+            if (!closeOnOutsideClick) event.preventDefault();
+          }}
           className={cn(
             "fixed z-[var(--ak-z-overlay)] flex flex-col border-border bg-surface text-foreground shadow-lg focus:outline-none",
             side === "left" && "border-r",

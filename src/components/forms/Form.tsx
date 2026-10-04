@@ -2,6 +2,7 @@ import {
   cloneElement,
   isValidElement,
   useId,
+  type CSSProperties,
   type FormEvent,
   type HTMLAttributes,
   type ReactElement,
@@ -23,6 +24,7 @@ export type FormProps<TFieldValues extends FieldValues> = {
   onSubmit: SubmitHandler<TFieldValues>;
   children: ReactNode;
   className?: string;
+  style?: CSSProperties;
 };
 
 export function Form<TFieldValues extends FieldValues>({
@@ -30,12 +32,14 @@ export function Form<TFieldValues extends FieldValues>({
   onSubmit,
   children,
   className,
+  style,
 }: FormProps<TFieldValues>) {
   return (
     <FormProvider {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn("space-y-5", className)}
+        style={style}
         noValidate
       >
         {children}

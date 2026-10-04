@@ -56,6 +56,7 @@ export {
   Modal,
   type ModalProps,
   type ModalType,
+  type ModalSize,
   type DialogProps,
 } from "./components/overlays/Dialog";
 

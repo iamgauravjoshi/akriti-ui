@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import {
   ArrowDownAZ,
   ArrowDownZA,
@@ -33,9 +33,14 @@ export type TableProps<T extends object> = {
   columns: TableColumn<T>[];
   data: T[];
   className?: string;
+  style?: CSSProperties;
   selectable?: boolean;
   onSelectionChange?: (selectedRows: T[], selectedIds: (string | number)[]) => void;
   onRowClick?: (record: T, index: number) => void;
+  /**
+   * Key used for row identity and selection. Required when rows do not
+   * have a unique `id` field; falls back to the row index otherwise.
+   */
   rowKey?: keyof T | ((row: T) => string | number);
   loading?: boolean;
   error?: boolean | ReactNode;
@@ -50,6 +55,7 @@ export function Table<T extends object>({
   columns,
   data,
   className,
+  style,
   selectable = false,
   onSelectionChange,
   onRowClick,
@@ -87,7 +93,13 @@ export function Table<T extends object>({
   }
 
   return (
-    <div className={cn("overflow-hidden rounded-xl border border-border bg-surface shadow-sm", className)}>
+    <div
+      className={cn(
+        "overflow-hidden rounded-xl border border-border bg-surface shadow-sm",
+        className,
+      )}
+      style={style}
+    >
       {(showSearch || showFilter) && (
         <div className="border-b border-border p-4">
           <div className="flex flex-col gap-4 sm:flex-row">
@@ -135,59 +147,7 @@ export function Table<T extends object>({
         </div>
       )}
 
-      <div className="space-y-4 p-4 md:hidden">
-        {paginatedData.length === 0
-          ? empty
-          : paginatedData.map((item, index) => {
-              const id = getRowId(item, rowKey, data.indexOf(item));
-              return (
-                <div key={String(id)} className="rounded-xl border border-border p-4">
-                  {selectable ? (
-                    <button
-                      type="button"
-                      className="mb-3"
-                      onClick={() => toggleRow(item)}
-                      aria-label="Select row"
-                    >
-                      {selectedIds.has(id) ? (
-                        <span className="flex h-4 w-4 items-center justify-center rounded bg-primary text-primary-foreground">
-                          <Check size={12} />
-                        </span>
-                      ) : (
-                        <Square size={16} className="text-muted-foreground" />
-                      )}
-                    </button>
-                  ) : null}
-                  <div className="space-y-3">
-                    {columns.map((column) => {
-                      if (column.key === "actions") return null;
-                      const value = (item as Record<string, unknown>)[column.key];
-                      return (
-                        <div key={column.key} className="flex justify-between gap-3 text-sm">
-                          <span className="text-muted-foreground">{column.title}</span>
-                          <div
-                            className={cn(
-                              column.clickable && "cursor-pointer text-primary hover:underline",
-                            )}
-                            onClick={() => column.clickable && onRowClick?.(item, index)}
-                          >
-                            {column.render ? column.render(value, item, index) : String(value ?? "")}
-                          </div>
-                        </div>
-                      );
-                    })}
-                    {columns.find((column) => column.key === "actions")?.render?.(
-                      undefined,
-                      item,
-                      index,
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-      </div>
-
-      <div className="relative hidden overflow-x-auto md:block">
+      <div className="relative overflow-x-auto">
         <table className="min-w-full divide-y divide-border">
           <thead className="bg-muted">
             <tr>

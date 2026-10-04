@@ -32,4 +32,19 @@ describe("Table", () => {
     await user.click(screen.getAllByLabelText("Select row")[0]);
     expect(onSelectionChange).toHaveBeenCalled();
   });
+
+  it("forwards style to the root element", () => {
+    render(
+      <Table
+        data={rows}
+        showSearch={false}
+        columns={[{ key: "name", title: "Name" }]}
+        style={{ marginTop: "8px" }}
+      />,
+    );
+    const root = screen
+      .getAllByRole("cell")[0]
+      .closest("div.overflow-hidden");
+    expect(root).toHaveStyle({ marginTop: "8px" });
+  });
 });
