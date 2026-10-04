@@ -38,22 +38,25 @@ via `tsconfig.app.json`, deletion recommended.
 
 ## Milestones
 
-- **M1 — foundation** (this branch): tokens in TS, `theme` prop +
+- **M1 — foundation** (done, `main`): tokens in TS, `theme` prop +
   nested `createTheme` sections, `docs/CONVENTIONS.md`, library build +
-  manifest + `akriti.css`, README rewrite. No component rewrites.
-- **M2 — core API cleanup**: `color`→`intent` migration path, `style`
-  prop pass-through where missing, `FieldForm` number coercion.
-- **M3 — layout/type primitives**: Typography (Text/Heading/Code/Kbd),
-  Stack/Flex/Divider, `VisuallyHidden`.
-- **M4 — display/feedback batch**: Card, Badge, Tag, Alert, Skeleton,
-  Progress, Avatar, Empty.
-- **M5 — overlays/navigation batch**: Tooltip, Popover, Tabs, Accordion,
-  Breadcrumb, Pagination, Drawer, DropdownMenu.
-- **M6 — advanced entry**: DatePicker, Slider, Upload, OTP, Autocomplete.
-- **M7 — DataTable**: typed columns, controlled sorting/filtering,
-  expandable rows, server mode, virtualization.
-- **M8 — publish**: `examples/basic-vite` consumer fixture, versioning +
-  changelog conventions, docs polish, npm release.
+  manifest + `akriti.css`, README rewrite.
+- **M2 — core API cleanup** (done, branch `feat/m2-api-cleanup`,
+  published, pending merge): `color` deprecation path, `style`
+  pass-through, `FieldForm` number coercion.
+- **M3 — layout/type primitives** (done, branch `feat/m3-primitives`):
+  Typography, Stack/Flex/Divider, VisuallyHidden.
+- **M4 — display/feedback batch** (done, this branch): Card, Badge, Tag,
+  Avatar, Empty, Alert, Progress, Skeleton.
+- **M5 — overlays/navigation batch** (done, this branch): Tooltip,
+  Popover, Drawer, DropdownMenu, Tabs, Accordion, Breadcrumb, Pagination.
+- **M6 — advanced entry** (done, this branch): Slider, Upload, OtpInput,
+  Combobox, DatePicker.
+- **M7 — DataTable** (done, this branch): typed accessor columns,
+  sorting, search, pagination, selection.
+- **M8 — publish** (partial, this branch): showcase homepage, consumer
+  fixture, changelog conventions. Still open: license choice, registry
+  publish, versioning automation.
 
 ## Conventions
 

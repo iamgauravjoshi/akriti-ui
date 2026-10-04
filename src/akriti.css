@@ -4,5 +4,9 @@
 @source "./components/overlays";
 @source "./components/feedback";
 @source "./components/data-display";
+@source "./components/typography";
+@source "./components/layout";
+@source "./components/navigation";
+@source "./components/a11y";
 @source "./providers";
 @import "./styles/tokens.css";

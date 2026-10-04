@@ -27,11 +27,18 @@ compiled utilities plus the `--ak-*` theme tokens.
 
 ## Components
 
-Buttons (`Button`, `IconButton`, `CloseButton`), form inputs (`Input`,
-`Textarea`, `PasswordInput`, `Checkbox`, `RadioGroup`, `Select` /
-`MultiSelect`, `Switch`), forms (`Form` + React Hook Form wrappers,
-`FieldForm`), overlays (`Dialog`, `Modal`), data display (`Table`),
-feedback (`Spinner`, `Toast`/`Toaster`).
+Typography (`Text`, `Heading`, `Code`, `Kbd`), layout (`Stack`, `Flex`,
+`Divider`, `VisuallyHidden`), buttons (`Button`, `IconButton`,
+`CloseButton`), form inputs (`Input`, `Textarea`, `PasswordInput`,
+`Checkbox`, `RadioGroup`, `Select` / `MultiSelect`, `Switch`, `Slider`,
+`Combobox`, `DatePicker`, `OtpInput`, `Upload`), forms (`Form` + React
+Hook Form wrappers, `FieldForm`), overlays (`Dialog`, `Modal`, `Drawer`,
+`Tooltip`, `Popover`, `DropdownMenu`), navigation (`Tabs`, `Accordion`,
+`Breadcrumb`, `Pagination`), data display (`Table`, `DataTable`, `Card`,
+`Badge`, `Tag`, `Avatar`, `Empty`), feedback (`Spinner`, `Toast` /
+`Toaster`, `Alert`, `Progress`, `Skeleton`).
+
+Open `npm run dev` for the showcase homepage with a live catalog.
 
 ## Theming
 

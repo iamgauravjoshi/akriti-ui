@@ -4,13 +4,19 @@ import { IconButton, useTheme } from "..";
 import { cn } from "../lib/cn";
 
 const links = [
-  { to: "/", label: "Buttons" },
+  { to: "/", label: "Home" },
+  { to: "/buttons", label: "Buttons" },
   { to: "/modals", label: "Modals" },
   { to: "/table", label: "Table" },
+  { to: "/datatable", label: "Data table" },
   { to: "/form-demo", label: "Field Form" },
   { to: "/form-demo-02", label: "RHF Form" },
   { to: "/toast", label: "Toast" },
   { to: "/primitives", label: "Primitives" },
+  { to: "/display", label: "Display" },
+  { to: "/navigation", label: "Navigation" },
+  { to: "/overlays", label: "Overlays" },
+  { to: "/entry", label: "Inputs" },
 ];
 
 export function ShowcaseLayout() {
