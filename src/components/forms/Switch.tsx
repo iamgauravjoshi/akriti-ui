@@ -12,6 +12,7 @@ export type SwitchProps = SwitchPrimitive.SwitchProps & {
   labelPosition?: "left" | "right";
   size?: SwitchSize;
   intent?: SemanticIntent;
+  /** @deprecated Use `intent` instead. */
   color?: SemanticIntent;
   loading?: boolean;
 };

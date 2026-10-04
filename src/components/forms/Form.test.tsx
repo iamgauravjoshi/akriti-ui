@@ -15,7 +15,7 @@ import { Button } from "../buttons/Button";
 function Harness({ onSubmit }: { onSubmit: (values: { name: string }) => void }) {
   const form = useForm({ defaultValues: { name: "" } });
   return (
-    <Form form={form} onSubmit={onSubmit}>
+    <Form form={form} onSubmit={onSubmit} style={{ marginTop: "4px" }}>
       <FormField name="name">
         <FormLabel>Name</FormLabel>
         <FormControl>
@@ -29,6 +29,13 @@ function Harness({ onSubmit }: { onSubmit: (values: { name: string }) => void })
 }
 
 describe("Form", () => {
+  it("forwards style to the form element", () => {
+    const { container } = render(<Harness onSubmit={() => undefined} />);
+    expect(container.querySelector("form")).toHaveStyle({
+      marginTop: "4px",
+    });
+  });
+
   it("submits entered values", async () => {
     const user = userEvent.setup();
     const onSubmit = vi.fn();

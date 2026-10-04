@@ -6,6 +6,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type CSSProperties,
   type KeyboardEvent,
   type MouseEvent,
   type ReactElement,
@@ -35,6 +36,7 @@ type SelectBaseProps<T extends string | number> = {
   loadOptions?: (inputValue: string) => Promise<Option<T>[]>;
   maxHeight?: string;
   className?: string;
+  style?: CSSProperties;
   error?: string | boolean | null;
   touched?: boolean;
   name?: string;
@@ -75,6 +77,7 @@ export function Select<T extends string | number = string | number>(
     loadOptions,
     maxHeight = "200px",
     className,
+    style,
     error,
     touched,
     name,
@@ -237,8 +240,9 @@ export function Select<T extends string | number = string | number>(
   }, [loadOptions, handleAsyncLoad]);
 
   useEffect(() => {
-    highlightedIndex >= 0 &&
+    if (highlightedIndex >= 0) {
       optionsRef.current[highlightedIndex]?.scrollIntoView({ block: "nearest" });
+    }
   }, [highlightedIndex]);
 
   const hasValue = multiple
@@ -248,7 +252,7 @@ export function Select<T extends string | number = string | number>(
   const errorText = typeof error === "string" ? error : undefined;
 
   return (
-    <div className={cn("space-y-1.5", className)}>
+    <div className={cn("space-y-1.5", className)} style={style}>
       {label ? (
         <label htmlFor={selectId} className="block text-sm font-medium text-foreground">
           {label}

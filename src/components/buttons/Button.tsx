@@ -15,6 +15,7 @@ export type ButtonVariant =
 export type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "color"> & {
   variant?: ButtonVariant;
   intent?: SemanticIntent;
+  /** @deprecated Use `intent` instead. */
   color?: SemanticIntent;
   size?: Size;
   loading?: boolean;
